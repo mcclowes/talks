@@ -1,18 +1,21 @@
 # Using AI cautiously
 
 **Trust (with verification):**
+
 - Structure and format
 - First drafts from good briefs
 - Refactoring existing content
 - Summarising long inputs
 
 **Verify carefully:**
+
 - Technical accuracy — check source
 - Anything touching product behaviour
 - Generated code, especially auth/data
 - Links and references
 
 **Never delegate:**
+
 - Final editorial judgment
 - Accuracy sign-off
 - Security or compliance content

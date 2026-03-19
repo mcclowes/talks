@@ -7,6 +7,7 @@ What happens when Claude can see your files, your project structure, and run com
 # What Claude Code actually is
 
 **It is:**
+
 - A CLI tool you run in your terminal
 - Claude with access to your entire project
 - Can read files, write files, run commands
@@ -14,6 +15,7 @@ What happens when Claude can see your files, your project structure, and run com
 - Works with your existing git workflow
 
 **It is not:**
+
 - A magic docs-generator
 - Always right about what your code does
 - A replacement for reading the source

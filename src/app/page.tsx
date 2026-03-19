@@ -10,7 +10,8 @@ export default function Home() {
       <h1 className={styles.title}>Talks</h1>
       {talks.length === 0 ? (
         <p className={styles.empty}>
-          No talks yet. Add markdown files to <code>data/talks/</code> to get started.
+          No talks yet. Add markdown files to <code>data/talks/</code> to get
+          started.
         </p>
       ) : (
         <ul className={styles.list}>
@@ -18,12 +19,16 @@ export default function Home() {
             <li key={talk.slug}>
               <Link href={`/${talk.slug}`} className={styles.card}>
                 <h2>{talk.title}</h2>
-                {talk.subtitle && <p className={styles.subtitle}>{talk.subtitle}</p>}
+                {talk.subtitle && (
+                  <p className={styles.subtitle}>{talk.subtitle}</p>
+                )}
                 {talk.date && <span className={styles.date}>{talk.date}</span>}
                 {talk.tags && (
                   <div className={styles.tags}>
                     {talk.tags.map((tag) => (
-                      <span key={tag} className={styles.tag}>{tag}</span>
+                      <span key={tag} className={styles.tag}>
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 )}

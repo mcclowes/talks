@@ -12,9 +12,7 @@
 
 # Resources
 
-- **Claude.ai** — claude.ai (free tier available)
-- **Claude Code** — docs.anthropic.com/claude-code (installation and quickstart)
-- **Vale prose linter** — vale.sh (style enforcement in CI)
-- **Docusaurus** — docusaurus.io (docs-as-code site generator)
-- **markdown-link-check** — github.com/tcort/markdown-link-check (broken link detection)
-- **cspell** — cspell.org (spell check for code and docs)
+{{qr:https://claude.ai|Claude.ai}}
+{{qr:https://docs.anthropic.com/en/docs/claude-code|Claude Code}}
+{{qr:https://vale.sh|Vale prose linter}}
+{{qr:https://docusaurus.io|Docusaurus}}

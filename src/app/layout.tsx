@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Roboto_Mono, Inknut_Antiqua, Poppins } from "next/font/google";
 import "./globals.scss";
 
-const inter = Inter({
-  variable: "--font-sans",
+const robotoMono = Roboto_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
+const inknutAntiqua = Inknut_Antiqua({
+  variable: "--font-serif",
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -24,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${robotoMono.variable} ${inknutAntiqua.variable} ${poppins.variable}`}>
         {children}
       </body>
     </html>

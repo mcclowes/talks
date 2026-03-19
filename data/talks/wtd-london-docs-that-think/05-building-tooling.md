@@ -27,7 +27,7 @@ A GitHub Action that runs on every PR touching docs:
 name: Docs Quality Check
 on:
   pull_request:
-    paths: ['docs/**']
+    paths: ["docs/**"]
 
 jobs:
   lint-docs:

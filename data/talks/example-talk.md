@@ -11,7 +11,7 @@ tags:
 
 This is the first slide of the talk.
 
-It supports **bold**, *italic*, and `inline code`.
+It supports **bold**, _italic_, and `inline code`.
 
 ---
 

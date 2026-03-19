@@ -1,6 +1,7 @@
 # Claude.ai — the accessible baseline
 
 **Good at:**
+
 - Drafting from a rough brief
 - Reformatting existing content
 - Suggesting structure for complex docs
@@ -8,6 +9,7 @@
 - Summarising long changelogs
 
 **Not good at:**
+
 - Knowing your product
 - Maintaining your voice (by default)
 - Catching its own factual errors
@@ -24,13 +26,16 @@ A Skill is a markdown file that tells Claude exactly how to behave for a given t
 # API Reference Skill
 
 ## Voice
+
 Direct, precise. No filler. Assume the reader is a developer.
 
 ## Structure
+
 Every endpoint must include: description, parameters
 table, request example, response example.
 
 ## Format
+
 OpenAPI-compatible. Code blocks use triple backticks
 with language tag. Never use passive voice.
 ```
@@ -76,9 +81,11 @@ fix: 500 on empty POST body
 **Output — with changelog Skill:**
 
 ## What's new
+
 - Webhooks now retry automatically on failure.
 - User pagination is available on the /users endpoint.
 
 ## Bug fixes
+
 - Fixed a 500 error on empty POST requests.
 - Auth handles null responses correctly.

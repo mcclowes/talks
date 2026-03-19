@@ -26,7 +26,7 @@ export function PresentationMode({
   const searchParams = useSearchParams();
   const initialSlide = Math.min(
     Math.max(0, Number(searchParams.get("slide") || 1) - 1),
-    slides.length - 1
+    slides.length - 1,
   );
   const [current, setCurrent] = useState(initialSlide);
   const total = slides.length;
@@ -88,7 +88,7 @@ export function PresentationMode({
       if (dx < 0) goNext();
       else goPrev();
     },
-    [goNext, goPrev]
+    [goNext, goPrev],
   );
 
   const slide = slides[current];
@@ -99,7 +99,11 @@ export function PresentationMode({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <button className={styles.exit} onClick={exit} aria-label="Exit presentation">
+      <button
+        className={styles.exit}
+        onClick={exit}
+        aria-label="Exit presentation"
+      >
         Exit
       </button>
       <div className={styles.slide}>
@@ -114,7 +118,12 @@ export function PresentationMode({
       </div>
 
       <div className={styles.controls}>
-        <button className={styles.navButton} onClick={goPrev} disabled={current === 0} aria-label="Previous slide">
+        <button
+          className={styles.navButton}
+          onClick={goPrev}
+          disabled={current === 0}
+          aria-label="Previous slide"
+        >
           ‹
         </button>
         <div className={styles.progress}>
@@ -128,7 +137,12 @@ export function PresentationMode({
             />
           ))}
         </div>
-        <button className={styles.navButton} onClick={goNext} disabled={current === total - 1} aria-label="Next slide">
+        <button
+          className={styles.navButton}
+          onClick={goNext}
+          disabled={current === total - 1}
+          aria-label="Next slide"
+        >
           ›
         </button>
         <span className={styles.counter}>

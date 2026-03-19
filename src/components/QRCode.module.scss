@@ -1,0 +1,25 @@
+.qrBlock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.url {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  word-break: break-all;
+  text-align: center;
+
+  &:hover {
+    color: var(--accent);
+  }
+}

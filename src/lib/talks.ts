@@ -35,7 +35,10 @@ function getTalkEntries(): TalkEntry[] {
 
     if (stat.isFile() && name.endsWith(".md")) {
       entries.push({ slug: name.replace(/\.md$/, ""), type: "file" });
-    } else if (stat.isDirectory() && fs.existsSync(path.join(fullPath, "index.md"))) {
+    } else if (
+      stat.isDirectory() &&
+      fs.existsSync(path.join(fullPath, "index.md"))
+    ) {
       entries.push({ slug: name, type: "directory" });
     }
 
@@ -47,7 +50,9 @@ export function getTalkSlugs(): string[] {
   return getTalkEntries().map((e) => e.slug);
 }
 
-function readFrontmatter(slug: string): { data: Record<string, unknown>; content: string } | null {
+function readFrontmatter(
+  slug: string,
+): { data: Record<string, unknown>; content: string } | null {
   const entry = getTalkEntries().find((e) => e.slug === slug);
   if (!entry) return null;
 
@@ -121,7 +126,10 @@ function loadDirectoryContent(slug: string, indexContent: string): string {
 }
 
 function parseSlides(content: string): TalkSlide[] {
-  const sections = content.split(/^---$/m).map((s) => s.trim()).filter(Boolean);
+  const sections = content
+    .split(/^---$/m)
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   return sections.map((section) => {
     const lines = section.split("\n");

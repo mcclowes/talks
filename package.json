@@ -1,5 +1,5 @@
 {
-  "name": "talks",
+  "name": "@mcclowes/talks",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,23 +7,34 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "next": "16.2.0",
+    "qrcode.react": "^4.2.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
     "sass": "^1.98.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^9.39.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
     "sass-embedded": "^1.98.0",
     "typescript": "^5",
+    "typescript-eslint": "^8.57.1",
     "vitest": "^4.1.0"
   }
 }
