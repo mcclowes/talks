@@ -2,66 +2,43 @@
 section: Context
 ---
 
-# Context
-
-Three types of context shape AI output:
-
-1. **Guardrails** — what you let it do for you
-2. **Knowledge** — how you up-skill the AI, e.g. skills
-3. **Enforcement** — automated rules like linting, CI checks, spell check
+Context is everything
 
 ---
 
-# Using AI cautiously
+# Context types
 
-**Trust (with verification):**
+Types of context shape AI output:
 
-- Structure and format
-- First drafts from good briefs
-- Refactoring existing content
-- Summarising long inputs
-
----
-
-# Using AI cautiously
-
-**Verify carefully:**
-
-- Technical accuracy — check source
-- Anything touching product behaviour
-- Generated code, especially auth/data
-- Links and references
+1. **Prompt** - what you asked it to do
+2. **Knowledge** — reference material, conventions, how you up-skill the AI, e.g. skills
+3. **Context window** - what the model is looking at currently
+4. **Guardrails** — what you let it do for you, what it can't do
 
 ---
 
-# Using AI cautiously
+If an AI has poor context and instructions, you get crap results.
 
-**Never delegate:**
-
-- Final editorial judgment
-- Accuracy sign-off
-- Security or compliance content
-- Anything going direct to prod
+Just like using basic ChatGPT.
 
 ---
 
-# When it goes wrong
+# Context window
 
-**Confident hallucination** — Describes a query parameter that doesn't exist, in a tone that suggests it definitely does. Always check parameter names against source.
+AI isn't omniscient - it has to decide what to add to its context window.
 
-**Voice drift** — Without a Skill, defaults to generic, slightly corporate. Fine for a draft. Bad if it ships.
+- Window = Knowledge it has (currently) in context.
+- Size = How much text a model can "see" at once
 
-**Outdated context** — Its training data has a cutoff. If your API changed recently, Claude may document the old version.
-
-**Over-documentation** — It loves thoroughness. Sometimes you need one sentence. Tell it so in the Skill.
+Size and behaviour varies per model (and plan)
 
 ---
 
-# A practical workflow
+# Context vs. context overload
 
-1. **Setup the context** — Ensure Claude has the write skills, project guidelines, etc.
-2. **Draft with Claude** — AI handles the blank page. You handle the brief.
-3. **Review technically** — Read it. Check it against source. Fix what's wrong.
-4. **Run the CI checks** — Lint, links, spelling — automated, before review.
-5. **Human editorial pass** — Read it as your reader would. Does it make sense?
-6. **Commit and iterate** — Update Skills when output quality drifts.
+If you reach the context window limit, it compacts (forgets things).
+
+Things that use up context window:
+- Prompts
+- Skills
+- Reference files - JSON, OpenAPI Spec

@@ -16,3 +16,5 @@ tags:
 Write the Docs London · Workshop
 
 @mcclowes
+
+{{qr:https://talks.mcclowes.com/wtd-london-docs-that-think}}

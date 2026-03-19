@@ -51,3 +51,11 @@ claude
 You'll be prompted to authenticate with your Claude account.
 
 {{qr:https://docs.anthropic.com/en/docs/claude-code|Claude Code docs}}
+
+---
+
+# Claude Cowork
+
+Not going to cover this, but its cool.
+
+Esp. if you write Word Docs

@@ -26,7 +26,7 @@ Product Lead @ **Weavr** · Previously Product @ **Codat**
 
 Ran developer experience and documentation at both companies
 
-In this space since 2022 — loving how fast it's moving
+In this space since 2021 — loving how fast it's moving
 
 ---
 
@@ -56,6 +56,8 @@ This workshop is everything I wish I'd had the first time around.
 ---
 
 # Things are moving fast...
+
+Most of this stuff didn't exist when I started at Weavr (Sep 2025).
 
 You might be surprised by some capabilities, if you haven't used it yourself.
 

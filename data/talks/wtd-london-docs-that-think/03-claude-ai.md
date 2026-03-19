@@ -2,6 +2,18 @@
 section: Claude.ai
 ---
 
+# Claude.ai — the accessible baseline
+
+![Claude UI](/images/wtd-london-docs-that-think/claude-ai-home.png)
+
+---
+
+# It's basically...
+
+ChatGPT
+
+---
+
 # Why Claude?
 
 **Tooling ecosystem** — Claude Code, Skills, MCP, system prompts. Built for workflows, not just chat.
@@ -9,6 +21,8 @@ section: Claude.ai
 **Strong at writing** — Consistently ranks highest on long-form and nuanced text. Docs aren't code — tone, structure, and clarity matter.
 
 **Large context window** — Up to 200k tokens. Feed it an entire docs site and it keeps track.
+
+**Not as obsequious** - It will challenge you.
 
 ---
 
@@ -24,16 +38,11 @@ section: Claude.ai
 
 ---
 
-# Claude.ai — the accessible baseline
-
-![Claude UI](/images/wtd-london-docs-that-think/claude-ai-home.png)
-
----
-
 # Good at...
 
 *(out of the box)*
 
+- Bouncing ideas off
 - Drafting from a rough brief
 - Reformatting existing content
 - Suggesting structure for complex docs
@@ -47,10 +56,13 @@ section: Claude.ai
 *(out of the box)*
 
 - Knowing your product
+- Reluctant to get additional context
 - Maintaining your voice (by default)
 - Catching its own factual errors
 - Knowing what's changed since training
 - Working across multiple files
+
+(Applies to all AI tools)
 
 ---
 
@@ -66,3 +78,12 @@ section: Claude.ai
 
 This is where Claude.ai stops being generic and starts knowing your product.
 
+---
+
+# Capabilities & connectors
+
+Plug into the tools you use.
+
+E.g.
+- Connect to and read Google Docs
+- Parse and edit Figma files
