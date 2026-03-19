@@ -1,0 +1,140 @@
+"use client";
+
+import { useState, useEffect, useCallback, useRef, ReactNode } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import styles from "./PresentationMode.module.scss";
+
+export interface Slide {
+  title: string;
+  content: ReactNode;
+}
+
+interface PresentationModeProps {
+  slides: Slide[];
+  title: string;
+  subtitle?: string;
+}
+
+const SWIPE_THRESHOLD = 50;
+
+export function PresentationMode({
+  slides,
+  title,
+  subtitle,
+}: PresentationModeProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialSlide = Math.min(
+    Math.max(0, Number(searchParams.get("slide") || 1) - 1),
+    slides.length - 1
+  );
+  const [current, setCurrent] = useState(initialSlide);
+  const total = slides.length;
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("slide", String(current + 1));
+    window.history.replaceState(null, "", url.pathname + url.search);
+  }, [current]);
+
+  const exit = useCallback(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("mode");
+    url.searchParams.delete("slide");
+    router.push(url.pathname + url.search);
+  }, [router]);
+
+  const goNext = useCallback(() => {
+    setCurrent((c) => Math.min(c + 1, total - 1));
+  }, [total]);
+
+  const goPrev = useCallback(() => {
+    setCurrent((c) => Math.max(c - 1, 0));
+  }, []);
+
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "ArrowRight" || e.key === " ") {
+        e.preventDefault();
+        goNext();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goPrev();
+      } else if (e.key === "Escape") {
+        exit();
+      }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [goNext, goPrev, exit]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (touchStartX.current === null || touchStartY.current === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX.current;
+      const dy = e.changedTouches[0].clientY - touchStartY.current;
+      touchStartX.current = null;
+      touchStartY.current = null;
+
+      if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dy) > Math.abs(dx)) return;
+
+      if (dx < 0) goNext();
+      else goPrev();
+    },
+    [goNext, goPrev]
+  );
+
+  const slide = slides[current];
+
+  return (
+    <div
+      className={styles.presentation}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      <button className={styles.exit} onClick={exit} aria-label="Exit presentation">
+        Exit
+      </button>
+      <div className={styles.slide}>
+        <div className={styles.slideHeader}>
+          <span className={styles.supertitle}>{title}</span>
+          <h1 className={styles.slideTitle}>{slide.title}</h1>
+          {current === 0 && subtitle && (
+            <p className={styles.subtitle}>{subtitle}</p>
+          )}
+        </div>
+        <div className={styles.slideContent}>{slide.content}</div>
+      </div>
+
+      <div className={styles.controls}>
+        <button className={styles.navButton} onClick={goPrev} disabled={current === 0} aria-label="Previous slide">
+          ‹
+        </button>
+        <div className={styles.progress}>
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              className={styles.dot}
+              data-active={i === current}
+              onClick={() => setCurrent(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+        <button className={styles.navButton} onClick={goNext} disabled={current === total - 1} aria-label="Next slide">
+          ›
+        </button>
+        <span className={styles.counter}>
+          {current + 1} / {total}
+        </span>
+      </div>
+    </div>
+  );
+}
