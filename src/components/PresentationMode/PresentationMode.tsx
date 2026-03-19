@@ -29,7 +29,7 @@ export function PresentationMode({
     slides.length - 1,
   );
   const [current, setCurrent] = useState(initialSlide);
-  const [fontScale, setFontScale] = useState(1);
+  const [fontScale, setFontScale] = useState(1.2);
   const total = slides.length;
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);

@@ -61,7 +61,7 @@
 
 .supertitle {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.75em;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -70,7 +70,7 @@
 }
 
 .slideTitle {
-  font-size: 2rem;
+  font-size: 2em;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -78,7 +78,7 @@
 
 .subtitle {
   margin-top: 0.5rem;
-  font-size: 1rem;
+  font-size: 1em;
   color: var(--fg-secondary);
 }
 
@@ -87,7 +87,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-size: 1.25rem;
+  font-size: 1.25em;
   line-height: 1.6;
 
   > * {
@@ -173,11 +173,11 @@
   }
 
   .slideTitle {
-    font-size: 1.6rem;
+    font-size: 1.6em;
   }
 
   .slideContent {
-    font-size: 1.1rem;
+    font-size: 1.1em;
   }
 }
 
@@ -203,19 +203,19 @@
   }
 
   .supertitle {
-    font-size: 0.65rem;
+    font-size: 0.65em;
   }
 
   .slideTitle {
-    font-size: 1.25rem;
+    font-size: 1.25em;
   }
 
   .subtitle {
-    font-size: 0.85rem;
+    font-size: 0.85em;
   }
 
   .slideContent {
-    font-size: 0.95rem;
+    font-size: 0.95em;
     line-height: 1.5;
   }
 
