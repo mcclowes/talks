@@ -12,7 +12,7 @@ section: Introduction
 4. **Docs-as-code tooling** — diagrams, linting, and automation
 5. **Skills & automation** — reusable plugins, demo apps, and hooks
 6. **AI-friendly docs** — making your docs work with AI
-7. **Guardrails and honest limits** — what to trust, what to verify, what to never delegate
+7. **Context and honest limits** — guardrails, knowledge, enforcement, and what to never delegate
 
 ---
 
@@ -20,9 +20,9 @@ section: Introduction
 
 **Max Clayton Clowes**
 
-Product Lead @ **Weavr** · Previously Product @ **Codat**
-
 ![Weavr](/images/wtd-london-docs-that-think/weavr-logo.png) ![Codat](/images/wtd-london-docs-that-think/codat-logo.svg)
+
+Product Lead @ **Weavr** · Previously Product @ **Codat**
 
 Ran developer experience and documentation at both companies
 
@@ -33,8 +33,8 @@ In this space since 2022 — loving how fast it's moving
 # Why this talk
 
 ### At **Codat**...
-- led a massive documentation transformation — largely by hand.
-- undreds of pages rewritten, restructured, and restyled. Months of work.
+- led a big documentation transformation — largely manual.
+- hundreds of pages rewritten, restructured, and restyled. Months of work.
 
 ### Now at **Weavr**...
 - I'm doing it again — but with Claude.
@@ -46,7 +46,7 @@ In this space since 2022 — loving how fast it's moving
 
 | | Codat (2023) | Weavr (2026) |
 |---|---|---|
-| **Scale** | ~200 pages rewritten | ~150 pages and growing |
+| **Scale** | ~400 pages rewritten | ~150 pages and growing |
 | **Approach** | Manual rewrite, page by page | Claude-assisted transformation |
 | **Style enforcement** | Linting + PR review | AI style checks + skills |
 | **Time to first draft** | Days per section | Minutes per section |

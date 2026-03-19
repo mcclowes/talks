@@ -8,7 +8,7 @@ What happens when Claude can see your files, your project structure, and run com
 
 ---
 
-# What Claude Code actually is
+# Claude Code CLI
 
 ![Claude Code terminal](/images/wtd-london-docs-that-think/claude-code-terminal.png)
 
@@ -99,15 +99,3 @@ $ claude
 
 done. 847 words. review before committing.
 ```
-
----
-
-# Docs-as-code with Docusaurus
-
-When your docs live in the repo, Claude Code can work across both simultaneously.
-
-- **Markdown + git** — Docs live alongside code. PRs include doc changes. History is shared.
-- **Docusaurus** — Generates a site from markdown. Sidebar, search, versioning — built in.
-- **Claude Code sees both** — Read source, understand existing docs structure, write new content that fits.
-- **Skills in the repo** — Your editorial rules travel with the project. New contributors get them too.
-

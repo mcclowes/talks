@@ -13,8 +13,6 @@ tags:
 
 {{bg:/images/wtd-london-docs-that-think/logo-claude.svg}}
 
-Using Claude and Claude Code in technical writing workflows
-
 Write the Docs London · Workshop
 
 @mcclowes

@@ -2,6 +2,17 @@
 section: Docs-as-code tooling
 ---
 
+# Docs-as-code with Docusaurus
+
+When your docs live in the repo, Claude Code can work across both simultaneously.
+
+- **Markdown + git** — Docs live alongside code. PRs include doc changes. History is shared.
+- **Docusaurus** — Generates a site from markdown. Sidebar, search, versioning — built in.
+- **Claude Code sees both** — Read source, understand existing docs structure, write new content that fits.
+- **Skills in the repo** — Your editorial rules travel with the project. New contributors get them too.
+
+---
+
 # My preferred stack
 
 ![Claude](/images/wtd-london-docs-that-think/logo-claude.svg) ![GitHub](/images/wtd-london-docs-that-think/logo-github.svg) ![Vercel](/images/wtd-london-docs-that-think/logo-vercel.svg) ![Next.js](/images/wtd-london-docs-that-think/logo-nextjs.svg) ![Docusaurus](/images/wtd-london-docs-that-think/logo-docusaurus.svg)
