@@ -9,11 +9,23 @@
   touch-action: pan-y;
 }
 
-.exit {
+.topBar {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fontControls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.fontButton,
+.exit {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -171,9 +183,13 @@
 
 // Mobile
 @media (max-width: 640px) {
-  .exit {
+  .topBar {
     top: 0.75rem;
     right: 0.75rem;
+  }
+
+  .fontButton,
+  .exit {
     padding: 0.4rem 0.75rem;
     font-size: 0.75rem;
   }

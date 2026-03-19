@@ -29,9 +29,18 @@ export function PresentationMode({
     slides.length - 1,
   );
   const [current, setCurrent] = useState(initialSlide);
+  const [fontScale, setFontScale] = useState(1);
   const total = slides.length;
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+
+  const increaseFontSize = useCallback(() => {
+    setFontScale((s) => Math.min(s + 0.1, 2));
+  }, []);
+
+  const decreaseFontSize = useCallback(() => {
+    setFontScale((s) => Math.max(s - 0.1, 0.5));
+  }, []);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -99,14 +108,32 @@ export function PresentationMode({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <button
-        className={styles.exit}
-        onClick={exit}
-        aria-label="Exit presentation"
-      >
-        Exit
-      </button>
-      <div className={styles.slide}>
+      <div className={styles.topBar}>
+        <div className={styles.fontControls}>
+          <button
+            className={styles.fontButton}
+            onClick={decreaseFontSize}
+            aria-label="Decrease font size"
+          >
+            A-
+          </button>
+          <button
+            className={styles.fontButton}
+            onClick={increaseFontSize}
+            aria-label="Increase font size"
+          >
+            A+
+          </button>
+        </div>
+        <button
+          className={styles.exit}
+          onClick={exit}
+          aria-label="Exit presentation"
+        >
+          Exit
+        </button>
+      </div>
+      <div className={styles.slide} style={{ fontSize: `${fontScale}em` }}>
         <div className={styles.slideHeader}>
           <span className={styles.supertitle}>{title}</span>
           <h1 className={styles.slideTitle}>{slide.title}</h1>
