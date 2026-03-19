@@ -31,6 +31,16 @@ What happens when Claude can see your files, your project structure, and run com
 
 ---
 
+# Claude Code in the browser
+
+![Claude Code in the browser](/images/wtd-london-docs-that-think/claude-code-browser.png)
+
+- Same capabilities — file access, git, commands — but from **claude.ai**
+- No terminal required
+- Great for quick tasks or when you're away from your usual setup
+
+---
+
 # Getting started
 
 **Prerequisites:** Node.js 18+, npm, Claude account (any plan)

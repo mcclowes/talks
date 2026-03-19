@@ -1,6 +1,12 @@
 .presentation {
   img {
+    max-height: 70vh;
+    max-width: 70vw;
+  }
+
+  img + p {
     max-height: 40vh;
+    max-width: 40vw;
   }
 
   .backgroundImage {

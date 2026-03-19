@@ -66,4 +66,49 @@
     border-radius: var(--radius-md);
     object-fit: contain;
   }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.5em 0;
+    font-size: 0.9em;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+
+    th,
+    td {
+      padding: 0.75em 1em;
+      text-align: left;
+    }
+
+    thead th {
+      background: var(--bg-secondary);
+      font-weight: 600;
+      color: var(--heading-color);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    tbody td:first-child {
+      font-weight: 600;
+      color: var(--heading-color);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    tbody tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
 }

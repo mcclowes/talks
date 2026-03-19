@@ -7,10 +7,12 @@ section: Introduction
 **What we're covering today**
 
 1. **Why documentation is still hard** — the unsolved problems AI can actually help with
-2. **Claude.ai — the accessible baseline** — skills, prompting, and getting consistent output
-3. **Claude Code — where it gets interesting** — the terminal, your file system, and docs-as-code
-4. **Building real tooling** — plugins, automation, and CI quality checks
-5. **Guardrails and honest limits** — what to trust, what to verify, what to never delegate
+2. **Claude.ai — the accessible baseline** — prompting and getting consistent output
+3. **Claude Code** — the terminal, your file system, and docs-as-code
+4. **Docs-as-code tooling** — diagrams, linting, and automation
+5. **Skills & automation** — reusable plugins, demo apps, and hooks
+6. **AI-friendly docs** — making your docs work with AI
+7. **Guardrails and honest limits** — what to trust, what to verify, what to never delegate
 
 ---
 
@@ -30,19 +32,19 @@ In this space since 2022 — loving how fast it's moving
 
 # Why this talk
 
-At **Codat**, I led a massive documentation transformation — largely by hand.
+### At **Codat**...
+- led a massive documentation transformation — largely by hand.
+- undreds of pages rewritten, restructured, and restyled. Months of work.
 
-Hundreds of pages rewritten, restructured, and restyled. Months of work.
-
-Now at **Weavr**, I'm doing it again — but with Claude.
-
-The difference is night and day.
+### Now at **Weavr**...
+- I'm doing it again — but with Claude.
+- The difference is night and day.
 
 ---
 
 # What's changed
 
-| | Codat (2022–2023) | Weavr (2024–2025) |
+| | Codat (2023) | Weavr (2026) |
 |---|---|---|
 | **Scale** | ~200 pages rewritten | ~150 pages and growing |
 | **Approach** | Manual rewrite, page by page | Claude-assisted transformation |
@@ -50,3 +52,9 @@ The difference is night and day.
 | **Time to first draft** | Days per section | Minutes per section |
 
 This workshop is everything I wish I'd had the first time around.
+
+---
+
+# Things are moving fast...
+
+You might be surprised by some capabilities, if you haven't used it yourself.

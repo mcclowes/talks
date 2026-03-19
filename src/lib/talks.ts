@@ -181,7 +181,11 @@ function parseSlides(content: string): TalkSlide[] {
     .map((s) => s.trim())
     .filter(Boolean);
 
-  return sections.map((section) => {
+  return sections.reduce<TalkSlide[]>((slides, section) => {
+    if (/^<!--\s*hidden\s*-->/.test(section)) {
+      return slides;
+    }
+
     const lines = section.split("\n");
     let title = "";
     let bodyStart = 0;
@@ -192,6 +196,7 @@ function parseSlides(content: string): TalkSlide[] {
     }
 
     const body = lines.slice(bodyStart).join("\n").trim();
-    return { title, body };
-  });
+    slides.push({ title, body });
+    return slides;
+  }, []);
 }

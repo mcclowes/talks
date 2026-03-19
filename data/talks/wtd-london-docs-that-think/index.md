@@ -1,5 +1,5 @@
 ---
-title: Documentation that thinks
+title: Living documentation
 subtitle: Using Claude and Claude Code in technical writing workflows
 date: "2025"
 tags:
@@ -9,7 +9,7 @@ tags:
   - AI
 ---
 
-# Documentation that thinks
+# Living documentation
 
 {{bg:/images/wtd-london-docs-that-think/logo-claude.svg}}
 

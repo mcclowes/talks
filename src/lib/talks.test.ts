@@ -93,6 +93,18 @@ describe("getTalk", () => {
     const talk = getTalk("__test-single__");
     expect(talk!.title).toBe("__test-single__");
   });
+
+  it("excludes slides marked with <!-- hidden -->", () => {
+    fs.writeFileSync(
+      TEST_FILE,
+      "---\ntitle: Test\n---\n# Visible\nContent\n\n---\n\n<!-- hidden -->\n# Hidden slide\nSecret\n\n---\n\n# Also visible\nMore content",
+    );
+
+    const talk = getTalk("__test-single__");
+    expect(talk!.slides).toHaveLength(2);
+    expect(talk!.slides[0].title).toBe("Visible");
+    expect(talk!.slides[1].title).toBe("Also visible");
+  });
 });
 
 describe("getAllTalks", () => {

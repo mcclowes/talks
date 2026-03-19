@@ -4,9 +4,13 @@ section: Claude.ai
 
 # Claude.ai — the accessible baseline
 
-{{bg:/images/wtd-london-docs-that-think/claude-ai-home.png}}
+![Claude UI](/images/wtd-london-docs-that-think/claude-ai-home.png)
 
-**Good at:**
+---
+
+# Good at...
+
+*(out of the box)*
 
 - Drafting from a rough brief
 - Reformatting existing content
@@ -14,7 +18,11 @@ section: Claude.ai
 - Explaining technical concepts simply
 - Summarising long changelogs
 
-**Not good at:**
+---
+
+# Not good at...
+
+*(out of the box)*
 
 - Knowing your product
 - Maintaining your voice (by default)
@@ -24,9 +32,11 @@ section: Claude.ai
 
 ---
 
-# Projects — giving Claude persistent context
+# Projects
 
-![Claude projects UI](/images/wtd-london-docs-that-think/claude-projects.png)
+### Giving Claude persistent context
+
+{{image-right:/images/wtd-london-docs-that-think/claude-projects.png|Claude projects UI}}
 
 - **Files** — upload style guides, API specs, glossaries. Claude references them in every conversation.
 - **Project instructions** — a custom prompt that shapes every response. Your tone, your rules, your constraints.
