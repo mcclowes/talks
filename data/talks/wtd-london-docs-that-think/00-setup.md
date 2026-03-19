@@ -1,3 +1,7 @@
+---
+section: Introduction
+---
+
 # Getting set up
 
 Two tracks today — follow whichever fits:

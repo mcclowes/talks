@@ -7,6 +7,7 @@ import styles from "./PresentationMode.module.scss";
 export interface Slide {
   title: string;
   content: ReactNode;
+  section?: string;
 }
 
 interface PresentationModeProps {
@@ -135,7 +136,7 @@ export function PresentationMode({
       </div>
       <div className={styles.slide} style={{ fontSize: `${fontScale}em` }}>
         <div className={styles.slideHeader}>
-          <span className={styles.supertitle}>{title}</span>
+          <span className={styles.supertitle}>{slide.section || title}</span>
           <h1 className={styles.slideTitle}>{slide.title}</h1>
           {current === 0 && subtitle && (
             <p className={styles.subtitle}>{subtitle}</p>

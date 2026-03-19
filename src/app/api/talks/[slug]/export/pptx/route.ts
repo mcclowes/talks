@@ -1,38 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import PptxGenJS from "pptxgenjs";
 import { getTalk } from "@/lib/talks";
-
-function stripQrSyntax(text: string): string {
-  return text.replace(/\{\{qr:([^|}]+)(?:\|([^}]*))?\}\}/g, (_match, url, label) =>
-    label ? `${label}: ${url}` : url,
-  );
-}
-
-function markdownToPlainLines(md: string): { text: string; isBullet: boolean }[] {
-  const lines = md.split("\n");
-  const result: { text: string; isBullet: boolean }[] = [];
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed) continue;
-
-    const bulletMatch = trimmed.match(/^[-*]\s+(.*)/);
-    let text = bulletMatch ? bulletMatch[1] : trimmed;
-
-    // Strip inline markdown
-    text = text
-      .replace(/\*\*(.*?)\*\*/g, "$1")
-      .replace(/\*(.*?)\*/g, "$1")
-      .replace(/`(.*?)`/g, "$1")
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
-
-    text = stripQrSyntax(text);
-
-    result.push({ text, isBullet: !!bulletMatch });
-  }
-
-  return result;
-}
+import { markdownToPlainLines } from "@/lib/markdown-utils";
 
 export async function GET(
   _request: NextRequest,

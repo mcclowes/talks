@@ -70,6 +70,22 @@ A real example — open-source, built with Claude Code as a pair programmer.
 
 ---
 
+# What's a GitHub Action?
+
+A GitHub Action is an automated task that runs when something happens in your repository.
+
+**Think of it as a robot colleague that reacts to events:**
+
+- Someone opens a PR → run spell check
+- A file in `docs/` changes → validate all links
+- A release is published → generate a changelog
+
+You define the rules in a YAML file. GitHub runs them for you. No server, no cron job, no asking DevOps.
+
+**For docs teams, this means quality checks that run automatically — before anyone reviews.**
+
+---
+
 # CI quality checks for docs
 
 A GitHub Action that runs on every PR touching docs:

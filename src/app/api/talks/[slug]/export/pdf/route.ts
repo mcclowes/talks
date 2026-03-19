@@ -1,20 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import PDFDocument from "pdfkit";
 import { getTalk } from "@/lib/talks";
-
-function stripQrSyntax(text: string): string {
-  return text.replace(/\{\{qr:([^|}]+)(?:\|([^}]*))?\}\}/g, (_match, url, label) =>
-    label ? `${label}: ${url}` : url,
-  );
-}
-
-function stripInlineMarkdown(text: string): string {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, "$1")
-    .replace(/\*(.*?)\*/g, "$1")
-    .replace(/`(.*?)`/g, "$1")
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
-}
+import { stripQrSyntax, stripInlineMarkdown } from "@/lib/markdown-utils";
 
 function docToBuffer(doc: PDFKit.PDFDocument): Promise<Buffer> {
   return new Promise((resolve, reject) => {
@@ -79,7 +66,10 @@ export async function GET(
           continue;
         }
 
-        if (y > doc.page.height - 60) break;
+        if (y > doc.page.height - 60) {
+          doc.addPage();
+          y = 50;
+        }
 
         if (trimmed.startsWith("## ")) {
           doc.fontSize(18).font("Helvetica-Bold");

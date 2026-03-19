@@ -1,8 +1,8 @@
 # Making your docs AI-friendly
 
-AI tools are only as good as what they can read. If your docs aren't structured for LLM consumption, you're leaving value on the table.
+AI tools are only as good as what they can read. 
 
-The **llms.txt standard** (llmstxt.org) defines a simple format for presenting your documentation to language models — a machine-readable index of your content.
+If your docs aren't structured for LLM consumption, your users' tools will struggle to make sense of it.
 
 ---
 
@@ -102,3 +102,22 @@ The llms.txt standard isn't framework-specific. Options exist for:
 Or just write `llms.txt` by hand — it's markdown. Point it at your most important pages.
 
 The key principle: **treat AI as a first-class consumer of your documentation.**
+
+--- 
+
+# Generating skills from your docs
+
+Your documentation is already the source of truth. Why not turn it into skills your customers can use?
+
+**The idea:** Take your structured docs and generate Claude Code skills that encode your product's conventions, API patterns, and best practices.
+
+**What this looks like:**
+
+1. You maintain your docs as normal
+2. A build step generates skills from your docs (voice, structure, API patterns)
+3. Customers install those skills into their Claude workflow
+4. When they ask Claude about your product, it answers using **your** conventions
+
+**The result:** Your customers get AI that speaks your product's language — not generic advice scraped from training data.
+
+This is the next step beyond llms.txt — you're not just making docs readable by AI, you're **shipping expertise as a tool.**

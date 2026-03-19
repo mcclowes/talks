@@ -4,6 +4,12 @@ import matter from "gray-matter";
 
 const TALKS_DIR = path.join(process.cwd(), "data/talks");
 
+const VALID_SLUG = /^[a-z0-9_][a-z0-9_-]*$/i;
+
+function isValidSlug(slug: string): boolean {
+  return VALID_SLUG.test(slug) && !slug.includes("..") && !slug.includes("/");
+}
+
 export interface TalkMeta {
   slug: string;
   title: string;
@@ -15,6 +21,7 @@ export interface TalkMeta {
 export interface TalkSlide {
   title: string;
   body: string;
+  section?: string;
 }
 
 export interface Talk extends TalkMeta {
@@ -51,52 +58,58 @@ export function getTalkSlugs(): string[] {
 }
 
 function readFrontmatter(
-  slug: string,
+  entry: TalkEntry,
 ): { data: Record<string, unknown>; content: string } | null {
-  const entry = getTalkEntries().find((e) => e.slug === slug);
-  if (!entry) return null;
+  try {
+    if (entry.type === "file") {
+      const raw = fs.readFileSync(
+        path.join(TALKS_DIR, `${entry.slug}.md`),
+        "utf-8",
+      );
+      return matter(raw);
+    }
 
-  if (entry.type === "file") {
-    const raw = fs.readFileSync(path.join(TALKS_DIR, `${slug}.md`), "utf-8");
+    const indexPath = path.join(TALKS_DIR, entry.slug, "index.md");
+    const raw = fs.readFileSync(indexPath, "utf-8");
     return matter(raw);
+  } catch {
+    return null;
   }
-
-  const indexPath = path.join(TALKS_DIR, slug, "index.md");
-  const raw = fs.readFileSync(indexPath, "utf-8");
-  return matter(raw);
 }
 
 export function getAllTalks(): TalkMeta[] {
-  return getTalkEntries().map((entry) => {
-    const result = readFrontmatter(entry.slug);
-    const data = result?.data ?? {};
-    return {
+  return getTalkEntries().reduce<TalkMeta[]>((talks, entry) => {
+    const result = readFrontmatter(entry);
+    if (!result) return talks;
+    const data = result.data;
+    talks.push({
       slug: entry.slug,
       title: (data.title as string) || entry.slug,
       subtitle: data.subtitle as string | undefined,
       date: data.date as string | undefined,
       tags: data.tags as string[] | undefined,
-    };
-  });
+    });
+    return talks;
+  }, []);
 }
 
 export function getTalk(slug: string): Talk | null {
+  if (!isValidSlug(slug)) return null;
+
   const entry = getTalkEntries().find((e) => e.slug === slug);
   if (!entry) return null;
 
-  const result = readFrontmatter(slug);
+  const result = readFrontmatter(entry);
   if (!result) return null;
 
   const { data } = result;
-  let allContent: string;
+  let slides: TalkSlide[];
 
   if (entry.type === "file") {
-    allContent = result.content;
+    slides = parseSlides(result.content);
   } else {
-    allContent = loadDirectoryContent(slug, result.content);
+    slides = loadDirectorySlides(slug, result.content);
   }
-
-  const slides = parseSlides(allContent);
 
   return {
     slug,
@@ -108,21 +121,42 @@ export function getTalk(slug: string): Talk | null {
   };
 }
 
-function loadDirectoryContent(slug: string, indexContent: string): string {
+function loadDirectorySlides(
+  slug: string,
+  indexContent: string,
+): TalkSlide[] {
   const dir = path.join(TALKS_DIR, slug);
   const sectionFiles = fs
     .readdirSync(dir)
     .filter((f) => f.endsWith(".md") && f !== "index.md")
     .sort();
 
-  const sections = sectionFiles.map((f) => {
+  const indexSlides = parseSlides(indexContent);
+
+  const sectionSlides = sectionFiles.flatMap((f) => {
     const raw = fs.readFileSync(path.join(dir, f), "utf-8");
-    const { content } = matter(raw);
-    return content.trim();
+    let content: string;
+    let section: string | undefined;
+
+    if (raw.trimStart().startsWith("---")) {
+      try {
+        const parsed = matter(raw);
+        content = parsed.content.trim();
+        section = parsed.data.section as string | undefined;
+      } catch {
+        content = raw.trim();
+      }
+    } else {
+      content = raw.trim();
+    }
+
+    return parseSlides(content).map((slide) => ({
+      ...slide,
+      section,
+    }));
   });
 
-  const parts = [indexContent.trim(), ...sections].filter(Boolean);
-  return parts.join("\n\n---\n\n");
+  return [...indexSlides, ...sectionSlides];
 }
 
 function parseSlides(content: string): TalkSlide[] {

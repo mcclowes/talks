@@ -5,7 +5,8 @@
 3. **CI brings docs into quality workflows** — Your docs deserve the same scrutiny as your code.
 4. **Cautious beats evangelical** — Use it where it helps. Keep humans in the loop where it matters.
 5. **Make your docs AI-friendly** — Your docs are already being consumed by AI. Make that experience good.
-6. **Start small** — One Skill. One workflow. One doc type. Prove it before you expand.
+6. **Ship structured changelogs** — AI consumers need to know what changed and what to do about it.
+7. **Start small** — One Skill. One workflow. One doc type. Prove it before you expand.
 
 @mcclowes · mcclowes.com
 

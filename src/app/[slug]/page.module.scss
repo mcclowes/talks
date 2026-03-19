@@ -52,7 +52,7 @@
   transition: border-color 0.15s ease, color 0.15s ease;
 
   &:hover {
-    color: var(--fg-primary);
+    color: var(--fg);
     border-color: var(--fg-secondary);
   }
 }

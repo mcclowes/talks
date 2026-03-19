@@ -23,6 +23,7 @@ export default async function TalkPage({
   const slides: Slide[] = talk.slides.map((s) => ({
     title: s.title,
     content: <SlideContent markdown={s.body} />,
+    section: s.section,
   }));
 
   return (
@@ -38,7 +39,7 @@ export default async function TalkPage({
           {talk.date && <span className={styles.date}>{talk.date}</span>}
         </header>
 
-        <TalkPageClient />
+        <TalkPageClient slug={slug} />
 
         <div className={styles.slides}>
           {talk.slides.map((slide, i) => (

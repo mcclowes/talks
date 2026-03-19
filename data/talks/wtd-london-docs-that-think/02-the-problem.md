@@ -9,3 +9,4 @@
 **No tooling feedback loop** — Docs live outside CI. Nobody catches issues early.
 
 **Blank page paralysis** — Knowing what to write but not how to start.
+

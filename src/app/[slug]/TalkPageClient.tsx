@@ -4,10 +4,13 @@ import { useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "./page.module.scss";
 
-export function TalkPageClient() {
+interface TalkPageClientProps {
+  slug: string;
+}
+
+export function TalkPageClient({ slug }: TalkPageClientProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const slug = pathname.split("/").pop();
 
   const startPresentation = useCallback(() => {
     router.push(`${pathname}?mode=presentation`);
