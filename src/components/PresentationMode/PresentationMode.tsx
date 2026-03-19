@@ -30,7 +30,8 @@ export function PresentationMode({
     slides.length - 1,
   );
   const [current, setCurrent] = useState(initialSlide);
-  const [fontScale, setFontScale] = useState(1.2);
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 640;
+  const [fontScale, setFontScale] = useState(isMobile ? 1 : 1.2);
   const [showTOC, setShowTOC] = useState(false);
   const total = slides.length;
   const touchStartX = useRef<number | null>(null);
