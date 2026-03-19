@@ -1,3 +1,11 @@
+# Guardrails
+
+1. what you let it do for you
+2. how you up-skill the ai - e.g. skills
+2. tooling support - e.g. spell check
+
+---
+
 # Using AI cautiously
 
 **Trust (with verification):**
