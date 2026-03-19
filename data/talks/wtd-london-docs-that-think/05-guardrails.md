@@ -19,12 +19,20 @@ section: Guardrails
 - Refactoring existing content
 - Summarising long inputs
 
+---
+
+# Using AI cautiously
+
 **Verify carefully:**
 
 - Technical accuracy — check source
 - Anything touching product behaviour
 - Generated code, especially auth/data
 - Links and references
+
+---
+
+# Using AI cautiously
 
 **Never delegate:**
 

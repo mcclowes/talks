@@ -124,6 +124,23 @@ export function PresentationMode({
   const isSectionSlide = slide.section === slide.title && slide.section !== undefined;
   const isTitleSlide = current === 0;
 
+  // Group slides into sections for the progress indicator
+  const sections = slides.reduce<
+    { name: string | undefined; startIndex: number; endIndex: number }[]
+  >((acc, s, i) => {
+    const last = acc[acc.length - 1];
+    if (last && s.section === last.name) {
+      last.endIndex = i;
+    } else {
+      acc.push({ name: s.section, startIndex: i, endIndex: i });
+    }
+    return acc;
+  }, []);
+
+  const currentSectionIndex = sections.findIndex(
+    (sec) => current >= sec.startIndex && current <= sec.endIndex,
+  );
+
   return (
     <div
       className={styles.presentation}
@@ -218,15 +235,36 @@ export function PresentationMode({
           ‹
         </button>
         <div className={styles.progress}>
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              className={styles.dot}
-              data-active={i === current}
-              onClick={() => setCurrent(i)}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
+          {sections.map((sec, si) => {
+            const isCurrentSection = si === currentSectionIndex;
+            if (isCurrentSection) {
+              return Array.from(
+                { length: sec.endIndex - sec.startIndex + 1 },
+                (_, j) => {
+                  const slideIndex = sec.startIndex + j;
+                  return (
+                    <button
+                      key={slideIndex}
+                      className={styles.dot}
+                      data-active={slideIndex === current}
+                      onClick={() => setCurrent(slideIndex)}
+                      title={slides[slideIndex].title || `Slide ${slideIndex + 1}`}
+                      aria-label={`Go to slide ${slideIndex + 1}`}
+                    />
+                  );
+                },
+              );
+            }
+            return (
+              <button
+                key={`section-${si}`}
+                className={`${styles.dot} ${styles.sectionDot}`}
+                onClick={() => setCurrent(sec.startIndex)}
+                title={sec.name || "Intro"}
+                aria-label={`Go to section: ${sec.name || "Intro"}`}
+              />
+            );
+          })}
         </div>
         <button
           className={styles.navButton}

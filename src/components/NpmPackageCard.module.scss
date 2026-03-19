@@ -1,0 +1,117 @@
+.card {
+  display: block;
+  border: 1px solid rgba(203, 56, 55, 0.25);
+  border-radius: var(--radius-md, 8px);
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(203, 56, 55, 0.2);
+    border-color: rgba(203, 56, 55, 0.4);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.packageName {
+  font-weight: 600;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #cb3837;
+}
+
+.npmIcon {
+  font-size: 20px;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: #cb3837;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.badgeError {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: #b00020;
+  color: #fff;
+  font-weight: 500;
+}
+
+.description {
+  margin: 10px 0 14px;
+  color: var(--fg-secondary, #aaa);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  color: var(--fg-secondary, #aaa);
+}
+
+.metaItem {
+  opacity: 0.8;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.topic {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(203, 56, 55, 0.25);
+  background: rgba(203, 56, 55, 0.08);
+  color: inherit;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover .topic {
+  border-color: rgba(203, 56, 55, 0.4);
+  background: rgba(203, 56, 55, 0.12);
+}
+
+.npmLogo {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.15;
+  pointer-events: none;
+}

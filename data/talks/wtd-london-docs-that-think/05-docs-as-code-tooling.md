@@ -2,7 +2,21 @@
 section: Docs-as-code tooling
 ---
 
-# Docs-as-code tooling
+# My preferred stack
+
+![Claude](/images/wtd-london-docs-that-think/logo-claude.svg) ![GitHub](/images/wtd-london-docs-that-think/logo-github.svg) ![Vercel](/images/wtd-london-docs-that-think/logo-vercel.svg) ![Next.js](/images/wtd-london-docs-that-think/logo-nextjs.svg) ![Docusaurus](/images/wtd-london-docs-that-think/logo-docusaurus.svg)
+
+## Three tools, one pipeline
+
+1. **Claude + Claude Code** — write, edit, and review docs with AI
+2. **GitHub + GitHub Actions** — version, collaborate, and automate
+3. **Vercel + Next.js/Docusaurus** — build and deploy
+
+Everything lives in code. Everything goes through CI. You're basically working in three tools — and they all talk to each other.
+
+---
+
+# Tooling
 
 One of the most useful things about having docs as code is you can implement tooling that self-manages and supports doing quite complicated things.
 
@@ -57,20 +71,18 @@ You describe what you want in plain English. Claude reads the project, understan
 
 Plugins, automation, and catching issues before they ship.
 
-- Building a Docusaurus glossary plugin
+Examples:
 - GitHub Actions for doc quality checks
 - Automating changelog generation on release
+- Building a Docusaurus glossary plugin
 
 ---
 
-# Building a Docusaurus glossary plugin
+# GitHub Actions
 
-A real example — open-source, built with Claude Code as a pair programmer.
+![GitHub CI checks on a pull request](/images/wtd-london-docs-that-think/github-ci-checks.png)
 
-1. **Brief Claude Code** — Describe what the plugin should do. Reference existing Docusaurus plugin architecture.
-2. **Show it the structure** — Point it at the Docusaurus source. Let it understand how plugins are registered.
-3. **Iterate on the output** — Ask for changes, review diffs, catch logic errors. You're still the engineer.
-4. **Test and publish** — Claude can write the tests. You review and ship.
+Broken links, markdown formatting, spell check — all caught before review. No human needed to flag these.
 
 ---
 
@@ -117,8 +129,21 @@ jobs:
 
 ---
 
-# What this looks like on a PR
+# Building a Docusaurus glossary plugin
 
-![GitHub CI checks on a pull request](/images/wtd-london-docs-that-think/github-ci-checks.png)
+A real example — open-source, built with Claude Code as a pair programmer.
 
-Broken links, markdown formatting, spell check — all caught before review. No human needed to flag these.
+1. **Add skills** — Give Claude Code [Docusaurus-specific skills](https://github.com/mcclowes/claude-docusaurus-skills) so it understands the framework's conventions and plugin architecture.
+2. **Brief Claude Code** — Describe what the plugin should do. Reference existing Docusaurus plugin architecture.
+3. **Show it the structure** — Point it at the Docusaurus source. Let it understand how plugins are registered.
+4. **Iterate on the output** — Ask for changes, review diffs, catch logic errors. You're still the engineer.
+5. **Test and publish** — Claude can write the tests. You review and ship.
+
+---
+
+# Here's one I made earlier
+
+It's essential that Claude has the right skills — domain-specific context makes all the difference. [mcclowes/claude-docusaurus-skills](https://github.com/mcclowes/claude-docusaurus-skills)
+
+{{npm:docusaurus-plugin-cookie-consent}}
+{{github:mcclowes/docusaurus-plugin-cookie-consent}}

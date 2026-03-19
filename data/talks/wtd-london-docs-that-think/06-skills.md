@@ -56,7 +56,7 @@ Store skills in your repo · version-control them · treat them as documentation
 
 ---
 
-# Real example: changelog from commits
+# Example: changelog from commits
 
 **Input — raw git log:**
 
@@ -82,6 +82,12 @@ fix: 500 on empty POST body
 - Fixed a 500 error on empty POST requests.
 - Auth handles null responses correctly.
    
+---
+
+
+
+https://github.com/mcclowes/claude-docusaurus-skills/tree/main/skills/google-style-guide
+
 ---
 
 # Keeping skills up to date

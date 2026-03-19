@@ -1,0 +1,98 @@
+.card {
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md, 10px);
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.05s ease;
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.repoName {
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--heading-color, #fff);
+}
+
+.githubIcon {
+  opacity: 0.7;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--fg-secondary, #ccc);
+}
+
+.badgeError {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #b00020;
+  color: #fff;
+}
+
+.description {
+  margin: 8px 0 12px;
+  color: var(--fg-secondary, #aaa);
+  font-size: 0.9em;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.metaItem {
+  opacity: 0.9;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.githubLogo {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.15;
+  color: var(--fg-secondary, #aaa);
+  pointer-events: none;
+}

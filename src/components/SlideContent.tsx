@@ -3,8 +3,10 @@
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { GitHubRepoCard } from "./GitHubRepoCard";
 import { ImageZoom } from "./ImageZoom";
 import { Mermaid } from "./Mermaid";
+import { NpmPackageCard } from "./NpmPackageCard";
 import { QRCode } from "./QRCode";
 import styles from "./SlideContent.module.scss";
 import presStyles from "./SlideContentPresentation.module.scss";
@@ -15,6 +17,8 @@ interface SlideContentProps {
 }
 
 const QR_PATTERN = /\{\{qr:(.*?)(?:\|(.*?))?\}\}/g;
+const GITHUB_PATTERN = /\{\{github:([\w./-]+)\}\}/g;
+const NPM_PATTERN = /\{\{npm:([@\w./-]+)\}\}/g;
 const BG_PATTERN = /\{\{bg:(.*?)(?:\|(.*?))?\}\}/;
 const IMAGE_RIGHT_PATTERN = /\{\{image-right:(.*?)(?:\|(.*?))?\}\}/;
 
@@ -43,19 +47,51 @@ function renderMarkdown(content: string, key: string) {
   );
 }
 
-function renderWithQRCodes(markdown: string): ReactNode[] {
+interface EmbedMatch {
+  index: number;
+  length: number;
+  node: ReactNode;
+}
+
+function renderWithEmbeds(markdown: string): ReactNode[] {
+  const matches: EmbedMatch[] = [];
+
+  for (const match of markdown.matchAll(QR_PATTERN)) {
+    matches.push({
+      index: match.index!,
+      length: match[0].length,
+      node: <QRCode key={`qr-${match.index}`} url={match[1]} label={match[2]} />,
+    });
+  }
+
+  for (const match of markdown.matchAll(GITHUB_PATTERN)) {
+    matches.push({
+      index: match.index!,
+      length: match[0].length,
+      node: <GitHubRepoCard key={`gh-${match.index}`} repo={match[1]} />,
+    });
+  }
+
+  for (const match of markdown.matchAll(NPM_PATTERN)) {
+    matches.push({
+      index: match.index!,
+      length: match[0].length,
+      node: <NpmPackageCard key={`npm-${match.index}`} packageName={match[1]} />,
+    });
+  }
+
+  matches.sort((a, b) => a.index - b.index);
+
   const parts: ReactNode[] = [];
   let lastIndex = 0;
 
-  for (const match of markdown.matchAll(QR_PATTERN)) {
-    const before = markdown.slice(lastIndex, match.index);
+  for (const m of matches) {
+    const before = markdown.slice(lastIndex, m.index);
     if (before) {
       parts.push(renderMarkdown(before, `md-${lastIndex}`));
     }
-    parts.push(
-      <QRCode key={`qr-${match.index}`} url={match[1]} label={match[2]} />,
-    );
-    lastIndex = match.index! + match[0].length;
+    parts.push(m.node);
+    lastIndex = m.index + m.length;
   }
 
   const remaining = markdown.slice(lastIndex);
@@ -67,7 +103,10 @@ function renderWithQRCodes(markdown: string): ReactNode[] {
 }
 
 export function SlideContent({ markdown, presentation }: SlideContentProps) {
-  const hasQR = markdown.includes("{{qr:");
+  const hasEmbeds =
+    markdown.includes("{{qr:") ||
+    markdown.includes("{{github:") ||
+    markdown.includes("{{npm:");
   const bgMatch = markdown.match(BG_PATTERN);
   const imageRightMatch = markdown.match(IMAGE_RIGHT_PATTERN);
   const bgSrc = bgMatch?.[1];
@@ -99,8 +138,8 @@ export function SlideContent({ markdown, presentation }: SlideContentProps) {
         </div>
       )}
       <div className={imageRightSrc ? presStyles.textPanel : undefined}>
-        {hasQR
-          ? renderWithQRCodes(contentMarkdown)
+        {hasEmbeds
+          ? renderWithEmbeds(contentMarkdown)
           : renderMarkdown(contentMarkdown, "main")}
       </div>
     </div>

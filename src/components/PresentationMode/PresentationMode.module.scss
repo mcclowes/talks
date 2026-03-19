@@ -193,6 +193,7 @@
 
 .progress {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -205,7 +206,9 @@
   cursor: pointer;
   transition:
     background 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    width 0.2s ease,
+    height 0.2s ease;
   padding: 0;
 
   &:hover {
@@ -216,6 +219,14 @@
     background: var(--accent);
     border-color: var(--accent);
   }
+}
+
+.sectionDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  border-width: 2px;
+  border-color: var(--fg-muted);
 }
 
 .counter {
@@ -374,6 +385,11 @@
   .dot {
     width: 8px;
     height: 8px;
+  }
+
+  .sectionDot {
+    width: 11px;
+    height: 11px;
   }
 
   .progress {
