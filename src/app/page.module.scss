@@ -77,3 +77,22 @@
   background: var(--bg-secondary);
   color: var(--fg-secondary);
 }
+
+@media (max-width: 640px) {
+  .main {
+    padding: 2rem 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card {
+    padding: 1rem 1.25rem;
+
+    h2 {
+      font-size: 1.1rem;
+    }
+  }
+}
