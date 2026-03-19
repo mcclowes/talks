@@ -2,9 +2,9 @@
 section: Claude Code
 ---
 
-# Now let's go further: Claude Code
+# Now let's go further...
 
-What happens when Claude can see your files, your project structure, and run commands.
+What happens when Claude can see your files, your project structure, and run commands on your device?
 
 ---
 
@@ -12,7 +12,9 @@ What happens when Claude can see your files, your project structure, and run com
 
 ![Claude Code terminal](/images/wtd-london-docs-that-think/claude-code-terminal.png)
 
-**It is:**
+---
+
+### It is...
 
 - A CLI tool you run in your terminal
 - Claude with access to your entire project
@@ -20,8 +22,9 @@ What happens when Claude can see your files, your project structure, and run com
 - Understands code and docs simultaneously
 - Works with your existing git workflow
 
-  
-**It is not:**
+---
+
+### It is not...
 
 - A magic docs-generator
 - Always right about what your code does
@@ -50,6 +53,8 @@ $ npm install -g @anthropic-ai/claude-code
 $ cd your-project
 $ claude
 ```
+
+... or just install from the Claude app.
 
 ---
 
@@ -106,23 +111,3 @@ When your docs live in the repo, Claude Code can work across both simultaneously
 - **Claude Code sees both** — Read source, understand existing docs structure, write new content that fits.
 - **Skills in the repo** — Your editorial rules travel with the project. New contributors get them too.
 
----
-
-# Shared skills: one source of truth
-
-Why write your own Docusaurus skills from scratch?
-
-```bash
-npx skills add mcclowes/claude-docusaurus-skills
-```
-
-Six skills covering the full Docusaurus workflow:
-
-- **Config validation** — catches invalid URLs, broken plugins, missing fields
-- **Documentation lookup** — latest APIs, markdown features, best practices
-- **v2 to v3 migration** — MDX v1 to v3, React 18, breaking changes
-- **Plugin creation** — remark, rehype, theme, content, lifecycle
-- **Theme customisation** — swizzling navbar, footer, sidebar, layouts
-- **Google style guide** — consistent voice and structure across contributors
-
-Open source. Version-controlled. Fix a skill once, everyone gets the fix.

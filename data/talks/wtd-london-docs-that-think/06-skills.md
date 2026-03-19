@@ -91,3 +91,32 @@ Because skills are committed to your repository, just like any other tooling, th
 You can either:
 - do that manually -> regenrate skills, etc.
 - you can use skill dependency management tools like npx skill to do this.
+
+---
+
+# Shared skills: one source of truth
+
+Why write your own Docusaurus skills from scratch?
+
+![Skills leaderboard](/images/wtd-london-docs-that-think/skills-leaderboard.png)
+
+www.skills.sh
+
+---
+
+# E.g. claude-skills-docusaurus
+
+```bash
+npx skills add mcclowes/claude-docusaurus-skills
+```
+
+Six skills covering the full Docusaurus workflow:
+
+- **Config validation** — catches invalid URLs, broken plugins, missing fields
+- **Documentation lookup** — latest APIs, markdown features, best practices
+- **v2 to v3 migration** — MDX v1 to v3, React 18, breaking changes
+- **Plugin creation** — remark, rehype, theme, content, lifecycle
+- **Theme customisation** — swizzling navbar, footer, sidebar, layouts
+- **Google style guide** — consistent voice and structure across contributors
+
+Open source. Version-controlled. Fix a skill once, everyone gets the fix.

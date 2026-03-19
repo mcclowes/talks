@@ -3,6 +3,7 @@
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { ImageZoom } from "./ImageZoom";
 import { Mermaid } from "./Mermaid";
 import { QRCode } from "./QRCode";
 import styles from "./SlideContent.module.scss";
@@ -28,6 +29,9 @@ const markdownComponents = {
         {children}
       </code>
     );
+  },
+  img({ src, alt }: ComponentPropsWithoutRef<"img">) {
+    return <ImageZoom src={typeof src === "string" ? src : undefined} alt={alt} />;
   },
 };
 
@@ -91,8 +95,7 @@ export function SlideContent({ markdown, presentation }: SlideContentProps) {
       )}
       {imageRightSrc && (
         <div className={presStyles.imageRightPanel}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={imageRightSrc} alt={imageRightAlt} />
+          <ImageZoom src={imageRightSrc} alt={imageRightAlt} />
         </div>
       )}
       <div className={imageRightSrc ? presStyles.textPanel : undefined}>

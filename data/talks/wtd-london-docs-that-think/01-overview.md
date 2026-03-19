@@ -58,3 +58,15 @@ This workshop is everything I wish I'd had the first time around.
 # Things are moving fast...
 
 You might be surprised by some capabilities, if you haven't used it yourself.
+
+---
+
+# Remote control from your phone
+
+![Claude browser control](/images/wtd-london-docs-that-think/claude-browser-control.png) 
+
+---
+
+# Browser control.
+
+![Claude Dispatch](/images/wtd-london-docs-that-think/claude-dispatch-desktop.png)
