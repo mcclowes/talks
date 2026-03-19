@@ -14,7 +14,8 @@ A Next.js presentation app for delivering talks from markdown files.
 ## Project structure
 
 - `src/app/` — Next.js App Router pages
-- `src/components/` — React components (PresentationMode, SlideContent, QRCode)
+- `src/app/api/talks/[slug]/export/` — Export API routes (markdown, pdf, pptx)
+- `src/components/` — React components (PresentationMode, PresentationWrapper, SlideContent, QRCode)
 - `src/lib/talks.ts` — Talk data loading from markdown files
 - `data/talks/` — Markdown talk files (single `.md` or directory with `index.md` + sections)
 
@@ -23,6 +24,7 @@ A Next.js presentation app for delivering talks from markdown files.
 ```bash
 npm run dev          # Start dev server
 npm run build        # Production build
+npm run start        # Start production server
 npm run test         # Run tests
 npm run test:watch   # Run tests in watch mode
 npm run lint         # ESLint
