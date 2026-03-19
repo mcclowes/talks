@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getTalk, getTalkSlugs } from "@/lib/talks";
 import { SlideContent } from "@/components/SlideContent";
+import { TableOfContents } from "@/components/TableOfContents";
 import { PresentationWrapper } from "@/components/PresentationMode";
 import type { Slide } from "@/components/PresentationMode";
 import { TalkPageClient } from "./TalkPageClient";
@@ -32,24 +33,41 @@ export default async function TalkPage({
       title={talk.title}
       subtitle={talk.subtitle}
     >
-      <main className={styles.main}>
-        <header className={styles.header}>
-          <h1>{talk.title}</h1>
-          {talk.subtitle && <p className={styles.subtitle}>{talk.subtitle}</p>}
-          {talk.date && <span className={styles.date}>{talk.date}</span>}
-        </header>
+      <div className={styles.layout}>
+        <aside className={styles.sidebar}>
+          <TableOfContents
+            items={talk.slides.map((s, i) => ({
+              index: i,
+              title: s.title,
+              section: s.section,
+            }))}
+          />
+        </aside>
+        <main className={styles.main}>
+          <header className={styles.header}>
+            <h1>{talk.title}</h1>
+            {talk.subtitle && (
+              <p className={styles.subtitle}>{talk.subtitle}</p>
+            )}
+            {talk.date && <span className={styles.date}>{talk.date}</span>}
+          </header>
 
-        <TalkPageClient slug={slug} />
+          <TalkPageClient slug={slug} />
 
-        <div className={styles.slides}>
-          {talk.slides.map((slide, i) => (
-            <section key={i} className={styles.slideSection}>
-              {slide.title && <h2>{slide.title}</h2>}
-              <SlideContent markdown={slide.body} />
-            </section>
-          ))}
-        </div>
-      </main>
+          <div className={styles.slides}>
+            {talk.slides.map((slide, i) => (
+              <section
+                key={i}
+                className={styles.slideSection}
+                data-slide-index={i}
+              >
+                {slide.title && <h2>{slide.title}</h2>}
+                <SlideContent markdown={slide.body} />
+              </section>
+            ))}
+          </div>
+        </main>
+      </div>
     </PresentationWrapper>
   );
 }
