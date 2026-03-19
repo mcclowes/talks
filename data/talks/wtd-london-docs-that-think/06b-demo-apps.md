@@ -1,3 +1,7 @@
+---
+section: Skills & automation
+---
+
 # Build it to prove it
 
 Your docs say "follow these steps to build X." But did anyone actually follow them?

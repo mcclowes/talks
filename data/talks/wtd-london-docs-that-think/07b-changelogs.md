@@ -1,3 +1,7 @@
+---
+section: AI-friendly docs
+---
+
 # AI-friendly changelogs
 
 Most changelogs are written for humans scanning a list. LLMs need something different — structured, filterable, action-oriented.

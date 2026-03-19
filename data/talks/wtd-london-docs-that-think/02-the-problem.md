@@ -1,3 +1,7 @@
+---
+section: The problem
+---
+
 # Documentation is still done the hard way
 
 **Style inconsistency** — Different writers, different voices, no enforcement.

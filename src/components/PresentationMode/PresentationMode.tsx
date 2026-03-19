@@ -66,7 +66,13 @@ export function PresentationMode({
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "ArrowRight" || e.key === " ") {
+      if (e.metaKey && (e.key === "=" || e.key === "+")) {
+        e.preventDefault();
+        increaseFontSize();
+      } else if (e.metaKey && e.key === "-") {
+        e.preventDefault();
+        decreaseFontSize();
+      } else if (e.key === "ArrowRight" || e.key === " ") {
         e.preventDefault();
         goNext();
       } else if (e.key === "ArrowLeft") {
@@ -78,7 +84,7 @@ export function PresentationMode({
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [goNext, goPrev, exit]);
+  }, [goNext, goPrev, exit, increaseFontSize, decreaseFontSize]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;

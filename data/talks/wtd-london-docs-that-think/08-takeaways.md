@@ -1,3 +1,7 @@
+---
+section: Takeaways
+---
+
 # What to take away
 
 1. **Skills are non-negotiable** — Generic prompts produce generic output. Skills are the fix.

@@ -1,3 +1,7 @@
+---
+section: Docs-as-code tooling
+---
+
 # Docs-as-code tooling
 
 One of the most useful things about having docs as code is you can implement tooling that self-manages and supports doing quite complicated things.
@@ -110,3 +114,11 @@ jobs:
       - name: Spell check
         run: npx cspell "docs/**/*.md"
 ```
+
+---
+
+# What this looks like on a PR
+
+![GitHub CI checks on a pull request](/images/wtd-london-docs-that-think/github-ci-checks.png)
+
+Broken links, markdown formatting, spell check — all caught before review. No human needed to flag these.

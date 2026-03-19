@@ -1,3 +1,7 @@
+---
+section: The problem
+---
+
 # Why Claude?
 
 **Strong at writing** — Consistently ranks highest on long-form and nuanced text. Docs aren't code — tone, structure, and clarity matter.

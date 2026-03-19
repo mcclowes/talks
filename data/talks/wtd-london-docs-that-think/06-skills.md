@@ -1,4 +1,6 @@
 ---
+section: Skills & automation
+---
 
 # Skills: the foundational fix
 

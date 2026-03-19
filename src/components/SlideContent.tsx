@@ -2,6 +2,7 @@
 
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Mermaid } from "./Mermaid";
 import { QRCode } from "./QRCode";
 import styles from "./SlideContent.module.scss";
@@ -11,6 +12,7 @@ interface SlideContentProps {
 }
 
 const QR_PATTERN = /\{\{qr:(.*?)(?:\|(.*?))?\}\}/g;
+const BG_PATTERN = /\{\{bg:(.*?)(?:\|(.*?))?\}\}/;
 
 const markdownComponents = {
   code({ className, children, ...props }: ComponentPropsWithoutRef<"code">) {
@@ -28,7 +30,7 @@ const markdownComponents = {
 
 function renderMarkdown(content: string, key: string) {
   return (
-    <ReactMarkdown key={key} components={markdownComponents}>
+    <ReactMarkdown key={key} remarkPlugins={[remarkGfm]} components={markdownComponents}>
       {content}
     </ReactMarkdown>
   );
@@ -59,13 +61,24 @@ function renderWithQRCodes(markdown: string): ReactNode[] {
 
 export function SlideContent({ markdown }: SlideContentProps) {
   const hasQR = markdown.includes("{{qr:");
+  const bgMatch = markdown.match(BG_PATTERN);
+  const bgSrc = bgMatch?.[1];
+  const contentMarkdown = bgMatch
+    ? markdown.replace(BG_PATTERN, "").trim()
+    : markdown;
 
   return (
     <div className={styles.content}>
+      {bgSrc && (
+        <div className={styles.backgroundImage}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={bgSrc} alt="" aria-hidden="true" />
+        </div>
+      )}
       {hasQR ? (
-        renderWithQRCodes(markdown)
+        renderWithQRCodes(contentMarkdown)
       ) : (
-        renderMarkdown(markdown, "main")
+        renderMarkdown(contentMarkdown, "main")
       )}
     </div>
   );

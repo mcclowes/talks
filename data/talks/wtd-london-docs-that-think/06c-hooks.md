@@ -1,3 +1,7 @@
+---
+section: Skills & automation
+---
+
 # Hooks: automating doc maintenance
 
 Skills tell Claude *how* to do something. Hooks tell Claude *when* to do it.

@@ -1,3 +1,7 @@
+---
+section: Docs-as-code tooling
+---
+
 # Generating diagrams with AI
 
 Documentation diagrams go stale the moment code changes. Mermaid lets you define diagrams as code — and AI can keep them in sync.

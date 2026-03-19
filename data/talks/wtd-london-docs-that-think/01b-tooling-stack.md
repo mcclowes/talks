@@ -1,3 +1,7 @@
+---
+section: Introduction
+---
+
 # My preferred stack
 
 ![Claude](/images/wtd-london-docs-that-think/logo-claude.svg) ![GitHub](/images/wtd-london-docs-that-think/logo-github.svg) ![Vercel](/images/wtd-london-docs-that-think/logo-vercel.svg) ![Next.js](/images/wtd-london-docs-that-think/logo-nextjs.svg) ![Docusaurus](/images/wtd-london-docs-that-think/logo-docusaurus.svg)

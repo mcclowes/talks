@@ -11,6 +11,8 @@ tags:
 
 # Documentation that thinks
 
+{{bg:/images/claude-logo.svg}}
+
 Using Claude and Claude Code in technical writing workflows
 
 Write the Docs London · Workshop

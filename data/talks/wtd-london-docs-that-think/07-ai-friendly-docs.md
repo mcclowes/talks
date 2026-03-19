@@ -1,3 +1,7 @@
+---
+section: AI-friendly docs
+---
+
 # Making your docs AI-friendly
 
 AI tools are only as good as what they can read. 

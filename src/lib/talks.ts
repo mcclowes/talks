@@ -133,6 +133,7 @@ function loadDirectorySlides(
 
   const indexSlides = parseSlides(indexContent);
 
+  let lastSection: string | undefined;
   const sectionSlides = sectionFiles.flatMap((f) => {
     const raw = fs.readFileSync(path.join(dir, f), "utf-8");
     let content: string;
@@ -150,10 +151,25 @@ function loadDirectorySlides(
       content = raw.trim();
     }
 
-    return parseSlides(content).map((slide) => ({
-      ...slide,
-      section,
-    }));
+    const slides: TalkSlide[] = [];
+
+    if (section && section !== lastSection) {
+      slides.push({
+        title: section,
+        body: "",
+        section,
+      });
+      lastSection = section;
+    }
+
+    slides.push(
+      ...parseSlides(content).map((slide) => ({
+        ...slide,
+        section,
+      })),
+    );
+
+    return slides;
   });
 
   return [...indexSlides, ...sectionSlides];
