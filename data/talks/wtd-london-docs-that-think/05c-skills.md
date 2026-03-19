@@ -46,16 +46,6 @@ Store skills in your repo · version-control them · treat them as documentation
 
 ---
 
-# Prompting is just clear communication
-
-- **Give context** — Who is the reader? What do they already know?
-- **Specify the output format** — "Return a markdown table with these columns..."
-- **Show an example** — One good example beats a paragraph of instructions.
-- **Use positive constraints** — Tell it what to do, not just what to avoid.
-- **Iterate, don't regenerate** — Edit the output with a follow-up, don't start over.
-
----
-
 # Example: changelog from commits
 
 **Input — raw git log:**
@@ -81,12 +71,16 @@ fix: 500 on empty POST body
 
 - Fixed a 500 error on empty POST requests.
 - Auth handles null responses correctly.
-   
+
 ---
 
+# Complex skills
 
-
-https://github.com/mcclowes/claude-docusaurus-skills/tree/main/skills/google-style-guide
+You can include whatever you want claude to look at:
+- Sample code illustrating a pattern
+- Actual code to run
+- Articles to emulate the voice/structure of
+- Data files
 
 ---
 

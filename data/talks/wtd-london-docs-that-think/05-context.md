@@ -2,7 +2,8 @@
 section: Context
 ---
 
-Context is everything
+- Context turns it from the vanilla model into something useful
+- Context is king.
 
 ---
 
@@ -10,16 +11,22 @@ Context is everything
 
 Types of context shape AI output:
 
-1. **Prompt** - what you asked it to do
-2. **Knowledge** — reference material, conventions, how you up-skill the AI, e.g. skills
-3. **Context window** - what the model is looking at currently
-4. **Guardrails** — what you let it do for you, what it can't do
+-  **Instructions** - The prompt
+    - Specific task you asked it to do
+    - What you let it do for you
+    - What it can't do
+    - Explicit conventions
+-  **Knowledge** — Reference material
+    - Files
+    - The internet
+    - Inferred conventions
+    - How you up-skill the AI, e.g. skills
 
 ---
 
 If an AI has poor context and instructions, you get crap results.
 
-Just like using basic ChatGPT.
+It's like using basic ChatGPT.
 
 ---
 
@@ -41,4 +48,14 @@ If you reach the context window limit, it compacts (forgets things).
 Things that use up context window:
 - Prompts
 - Skills
-- Reference files - JSON, OpenAPI Spec
+- Looking through loads of files to understand things
+- Large reference files - JSON, OpenAPI Spec
+
+---
+
+# Stupid AI does stupid things
+
+If you don't proactively provide good context, it will:
+- Go looking for information (and fill the window)
+- Look at/for irrelevant info
+- Fail at the task and need to try again

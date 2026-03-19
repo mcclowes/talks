@@ -55,3 +55,7 @@ Each skill stays focused. Compose them for full coverage.
 > Create a resource by sending a POST request. The request body must include `name` and `type`.
 
 Same information. Half the words. Twice as clear.
+
+---
+
+{{github:mcclowes/claude-docusaurus-skills/tree/main/skills/google-style-guide}}

@@ -6,10 +6,12 @@ section: Skills & automation
 
 Skills are powerful — but Claude often won't use them unless you ask.
 
+> Context window management
+
 - Skill auto-activation hovers around **~50%** without intervention
 - Claude defaults to answering from existing knowledge
 - It has the specialised tool but doesn't reach for it
-- Vercel found **AGENTS.md inline docs outperform skills** in benchmarks
+- Research found **AGENTS.md/CLAUDE.md inline docs outperform skills** in benchmarks
 
 The bottleneck isn't the knowledge — it's the trigger.
 

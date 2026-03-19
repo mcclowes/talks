@@ -1,8 +1,10 @@
 ---
-section: Claude.md
+section: CLAUDE.md
 ---
 
 # CLAUDE.md — your first guardrail
+
+Like a `README.md` for Claude.
 
 A markdown file in your repo root that Claude Code reads automatically on every session.
 
@@ -27,4 +29,6 @@ npm run build, npm run test, npm run docs:build
 - **Shared** — every contributor (and Claude) gets the same instructions
 - **Hierarchical** — nest CLAUDE.md files in subdirectories for scoped rules
 
-Don't make it too big
+Don't make it too big.
+
+>AGENTS.md
