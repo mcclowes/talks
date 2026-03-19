@@ -1,16 +1,17 @@
 ---
-section: Introduction
+section: Setup
 ---
 
 # Getting set up
 
 Two tracks today — follow whichever fits:
 
-**Track A** — Browser only (sections 1–3)
+## **Track A** — Browser only
 
-- You need a Claude account (free tier is fine)
+- You need a Claude account
+- Free tier is fine (but some features are premium)
 
-**Track B** — Hands-on with Claude Code (sections 3–5)
+## **Track B** — Hands-on with Claude Code
 
 - You need Node.js 18+ and a terminal
 
@@ -18,7 +19,7 @@ Two tracks today — follow whichever fits:
 
 # Create a Claude account
 
-Go to **claude.ai** and sign up — free tier works for everything today.
+Go to **claude.ai** and sign up — free tier is fine.
 
 {{qr:https://claude.ai|Sign up at claude.ai}}
 

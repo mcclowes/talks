@@ -125,3 +125,25 @@ Your documentation is already the source of truth. Why not turn it into skills y
 **The result:** Your customers get AI that speaks your product's language — not generic advice scraped from training data.
 
 This is the next step beyond llms.txt — you're not just making docs readable by AI, you're **shipping expertise as a tool.**
+
+---
+
+# Automating skill generation
+
+Use the Claude API in a build script that reads your docs and outputs skill files:
+
+```js
+// generate-skills.js
+const docs = readDocsDir("./docs");
+
+for (const doc of docs) {
+  const skill = await claude.messages.create({
+    model: "claude-sonnet-4-6-20250514",
+    system: "Given this documentation, generate a Claude Code skill...",
+    messages: [{ role: "user", content: doc.content }],
+  });
+  writeFile(`.claude/skills/${doc.slug}.md`, skill);
+}
+```
+
+Hook it into your CI — docs change, skills update automatically. Publish them alongside your docs for customers to download.

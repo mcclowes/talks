@@ -22,7 +22,7 @@ export default async function TalkPage({
 
   const slides: Slide[] = talk.slides.map((s) => ({
     title: s.title,
-    content: <SlideContent markdown={s.body} />,
+    content: <SlideContent markdown={s.body} presentation />,
     section: s.section,
   }));
 

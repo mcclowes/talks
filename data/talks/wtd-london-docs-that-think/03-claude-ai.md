@@ -4,7 +4,7 @@ section: Claude.ai
 
 # Claude.ai — the accessible baseline
 
-![Claude.ai home screen](/images/wtd-london-docs-that-think/claude-ai-home.png)
+{{bg:/images/wtd-london-docs-that-think/claude-ai-home.png}}
 
 **Good at:**
 

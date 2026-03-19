@@ -31,6 +31,7 @@ export function PresentationMode({
   );
   const [current, setCurrent] = useState(initialSlide);
   const [fontScale, setFontScale] = useState(1.2);
+  const [showTOC, setShowTOC] = useState(false);
   const total = slides.length;
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -72,6 +73,18 @@ export function PresentationMode({
       } else if (e.metaKey && e.key === "-") {
         e.preventDefault();
         decreaseFontSize();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setShowTOC(true);
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setShowTOC(false);
+      } else if (showTOC) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          setShowTOC(false);
+        }
+        return;
       } else if (e.key === "ArrowRight" || e.key === " ") {
         e.preventDefault();
         goNext();
@@ -84,7 +97,7 @@ export function PresentationMode({
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [goNext, goPrev, exit, increaseFontSize, decreaseFontSize]);
+  }, [goNext, goPrev, exit, increaseFontSize, decreaseFontSize, showTOC]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -108,6 +121,8 @@ export function PresentationMode({
   );
 
   const slide = slides[current];
+  const isSectionSlide = slide.section === slide.title && slide.section !== undefined;
+  const isTitleSlide = current === 0;
 
   return (
     <div
@@ -140,16 +155,58 @@ export function PresentationMode({
           Exit
         </button>
       </div>
-      <div className={styles.slide} style={{ fontSize: `${fontScale}em` }}>
+      <div
+        className={`${styles.slide} ${isTitleSlide ? styles.titleSlide : ""} ${isSectionSlide ? styles.sectionSlide : ""}`}
+        style={{ fontSize: `${fontScale}em` }}
+      >
         <div className={styles.slideHeader}>
-          <span className={styles.supertitle}>{slide.section || title}</span>
+          {!isSectionSlide && (
+            <span className={styles.supertitle}>{slide.section || title}</span>
+          )}
           <h1 className={styles.slideTitle}>{slide.title}</h1>
           {current === 0 && subtitle && (
             <p className={styles.subtitle}>{subtitle}</p>
           )}
         </div>
-        <div className={styles.slideContent}>{slide.content}</div>
+        {!isSectionSlide && (
+          <div className={styles.slideContent}>{slide.content}</div>
+        )}
       </div>
+
+      {showTOC && (
+        <div className={styles.tocOverlay} onClick={() => setShowTOC(false)}>
+          <div
+            className={styles.tocPanel}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className={styles.tocTitle}>Table of contents</h2>
+            <nav className={styles.tocNav}>
+              {slides.map((s, i) => {
+                const prevSection = i > 0 ? slides[i - 1].section : undefined;
+                const isNewSection = s.section && s.section !== prevSection;
+                return (
+                  <div key={i}>
+                    {isNewSection && (
+                      <div className={styles.tocSection}>{s.section}</div>
+                    )}
+                    <button
+                      className={styles.tocItem}
+                      data-active={i === current}
+                      onClick={() => {
+                        setCurrent(i);
+                        setShowTOC(false);
+                      }}
+                    >
+                      <span className={styles.tocSlideNum}>{i + 1}</span>
+                      <span>{s.title || "(untitled)"}</span>
+                    </button>
+                  </div>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+      )}
 
       <div className={styles.controls}>
         <button

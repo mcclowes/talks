@@ -54,6 +54,64 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.titleSlide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .slideHeader {
+    margin-bottom: 0;
+  }
+
+  .supertitle {
+    font-size: 1em;
+  }
+
+  .slideTitle {
+    font-size: 3.5em;
+  }
+
+  .subtitle {
+    font-size: 1.25em;
+    margin-top: 0.75rem;
+  }
+
+  .slideContent {
+    font-size: 1.5em;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+}
+
+.sectionSlide {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .slideHeader {
+    margin-bottom: 0;
+  }
+
+  .slideTitle {
+    font-size: 4em;
+    letter-spacing: -0.03em;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      var(--bg-secondary) 0%,
+      transparent 70%
+    );
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
 .slideHeader {
   margin-bottom: 2rem;
   flex-shrink: 0;
@@ -164,6 +222,91 @@
   font-size: 0.75rem;
   color: var(--fg-muted);
   font-variant-numeric: tabular-nums;
+}
+
+.tocOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.tocPanel {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.tocTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--fg);
+}
+
+.tocNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tocSection {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  padding: 0.75rem 0.5rem 0.25rem;
+  margin-top: 0.5rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.tocItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--fg-secondary);
+  font-size: 0.9rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s ease, color 0.1s ease;
+
+  &:hover {
+    background: var(--bg-secondary);
+    color: var(--fg);
+  }
+
+  &[data-active="true"] {
+    color: var(--accent);
+    font-weight: 600;
+  }
+}
+
+.tocSlideNum {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.5rem;
+  text-align: right;
 }
 
 // Tablet

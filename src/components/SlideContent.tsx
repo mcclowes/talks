@@ -6,13 +6,16 @@ import remarkGfm from "remark-gfm";
 import { Mermaid } from "./Mermaid";
 import { QRCode } from "./QRCode";
 import styles from "./SlideContent.module.scss";
+import presStyles from "./SlideContentPresentation.module.scss";
 
 interface SlideContentProps {
   markdown: string;
+  presentation?: boolean;
 }
 
 const QR_PATTERN = /\{\{qr:(.*?)(?:\|(.*?))?\}\}/g;
 const BG_PATTERN = /\{\{bg:(.*?)(?:\|(.*?))?\}\}/;
+const IMAGE_RIGHT_PATTERN = /\{\{image-right:(.*?)(?:\|(.*?))?\}\}/;
 
 const markdownComponents = {
   code({ className, children, ...props }: ComponentPropsWithoutRef<"code">) {
@@ -59,27 +62,44 @@ function renderWithQRCodes(markdown: string): ReactNode[] {
   return parts;
 }
 
-export function SlideContent({ markdown }: SlideContentProps) {
+export function SlideContent({ markdown, presentation }: SlideContentProps) {
   const hasQR = markdown.includes("{{qr:");
   const bgMatch = markdown.match(BG_PATTERN);
+  const imageRightMatch = markdown.match(IMAGE_RIGHT_PATTERN);
   const bgSrc = bgMatch?.[1];
-  const contentMarkdown = bgMatch
-    ? markdown.replace(BG_PATTERN, "").trim()
-    : markdown;
+  const imageRightSrc = presentation ? imageRightMatch?.[1] : undefined;
+  const imageRightAlt = imageRightMatch?.[2] || "";
+
+  let contentMarkdown = markdown;
+  if (bgMatch) contentMarkdown = contentMarkdown.replace(BG_PATTERN, "").trim();
+  if (imageRightMatch)
+    contentMarkdown = contentMarkdown.replace(IMAGE_RIGHT_PATTERN, "").trim();
+
+  const classNames = [styles.content];
+  if (presentation) {
+    classNames.push(presStyles.presentation);
+    if (imageRightSrc) classNames.push(presStyles.imageRight);
+  }
 
   return (
-    <div className={styles.content}>
-      {bgSrc && (
-        <div className={styles.backgroundImage}>
+    <div className={classNames.join(" ")}>
+      {presentation && bgSrc && (
+        <div className={presStyles.backgroundImage}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={bgSrc} alt="" aria-hidden="true" />
         </div>
       )}
-      {hasQR ? (
-        renderWithQRCodes(contentMarkdown)
-      ) : (
-        renderMarkdown(contentMarkdown, "main")
+      {imageRightSrc && (
+        <div className={presStyles.imageRightPanel}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={imageRightSrc} alt={imageRightAlt} />
+        </div>
       )}
+      <div className={imageRightSrc ? presStyles.textPanel : undefined}>
+        {hasQR
+          ? renderWithQRCodes(contentMarkdown)
+          : renderMarkdown(contentMarkdown, "main")}
+      </div>
     </div>
   );
 }

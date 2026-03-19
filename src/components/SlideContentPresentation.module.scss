@@ -1,0 +1,67 @@
+.presentation {
+  img {
+    max-height: 40vh;
+  }
+
+  .backgroundImage {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    img {
+      width: 80vw;
+      max-width: none !important;
+      max-height: none !important;
+      height: auto;
+      object-fit: contain;
+      opacity: 0.9;
+      border-radius: 0 !important;
+      transform: translateY(15%);
+    }
+  }
+
+  > *:not(.backgroundImage) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &.imageRight {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .textPanel {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .imageRightPanel {
+    flex: 0 0 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 1;
+
+    img {
+      max-width: 100%;
+      max-height: 60vh;
+      border-radius: var(--radius-md);
+      object-fit: contain;
+    }
+  }
+
+  p:has(> img + img) > img {
+    display: inline-block;
+    height: 3rem;
+    width: auto;
+    max-height: 3rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+}
