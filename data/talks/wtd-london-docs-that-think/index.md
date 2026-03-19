@@ -11,7 +11,7 @@ tags:
 
 # Documentation that thinks
 
-{{bg:/images/claude-logo.svg}}
+{{bg:/images/wtd-london-docs-that-think/logo-claude.svg}}
 
 Using Claude and Claude Code in technical writing workflows
 
