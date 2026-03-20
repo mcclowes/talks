@@ -17,6 +17,12 @@ resources:
   - title: Claude Code hooks
     url: https://docs.anthropic.com/en/docs/claude-code/hooks
     description: Automate workflows with lifecycle hooks
+  - title: Measuring Claude Code skill activation with sandboxed evals
+    url: https://scottspence.com/posts/measuring-claude-code-skill-activation-with-sandboxed-evals
+    description: Scott Spence on evaluating skill activation reliability
+  - title: Claude skills hesitancy
+    url: https://mcclowes.com/blog/2026/01/30/claude-skills-hesitancy
+    description: Why Claude sometimes fails to activate skills and how to fix it
 summary: |
   We cover how technical writers can use Claude Code to work more effectively with docs-as-code workflows. We look at the differences between the standard Claude chat interface and Claude Code, focusing on how Claude Code can access local files, understand project structure, and run terminal commands. We dig into context windows, the `claude.md` project file, and well-structured prompts — all key to making the model behave like an informed collaborator rather than a generic chatbot.
 

@@ -225,23 +225,6 @@ export function getTalkResources(slug: string): ResourceFile[] {
   return listResources(resourcesDir, resourcesDir);
 }
 
-export function getTalkResourceContent(
-  slug: string,
-  resourcePath: string,
-): { content: Buffer; filename: string } | null {
-  if (!isValidSlug(slug)) return null;
-
-  const normalized = path.normalize(resourcePath);
-  if (normalized.includes("..")) return null;
-
-  const fullPath = path.join(TALKS_DIR, slug, "resources", normalized);
-  if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile()) return null;
-
-  return {
-    content: fs.readFileSync(fullPath),
-    filename: path.basename(fullPath),
-  };
-}
 
 function parseSlides(content: string): TalkSlide[] {
   const sections = content

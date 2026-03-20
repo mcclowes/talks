@@ -10,6 +10,9 @@ interface ResourceTreeProps {
   files?: ResourceFile[];
 }
 
+const GITHUB_BASE =
+  "https://github.com/mcclowes/talks/blob/main/data/talks";
+
 function ResourceNode({
   node,
   slug,
@@ -43,7 +46,7 @@ function ResourceNode({
   return (
     <li className={styles.file}>
       <a
-        href={`/api/talks/${slug}/resources/${node.path}`}
+        href={`${GITHUB_BASE}/${slug}/resources/${node.path}`}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.fileLink}
