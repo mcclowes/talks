@@ -34,15 +34,6 @@ export default async function TalkPage({
       subtitle={talk.subtitle}
     >
       <div className={styles.layout}>
-        <aside className={styles.sidebar}>
-          <TableOfContents
-            items={talk.slides.map((s, i) => ({
-              index: i,
-              title: s.title,
-              section: s.section,
-            }))}
-          />
-        </aside>
         <main className={styles.main}>
           <header className={styles.header}>
             <h1>{talk.title}</h1>
@@ -67,6 +58,15 @@ export default async function TalkPage({
             ))}
           </div>
         </main>
+        <aside className={styles.sidebar}>
+          <TableOfContents
+            items={talk.slides.map((s, i) => ({
+              index: i,
+              title: s.title,
+              section: s.section,
+            }))}
+          />
+        </aside>
       </div>
     </PresentationWrapper>
   );

@@ -15,6 +15,10 @@
   flex-shrink: 0;
   width: 220px;
   padding-top: 3rem;
+  order: 1;
+  align-self: flex-start;
+  position: sticky;
+  top: 0;
 
   @media (max-width: 1024px) {
     display: none;
@@ -58,26 +62,49 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: flex-end;
+  gap: 0.5rem;
   margin-bottom: 2rem;
 }
 
-.exportButtons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.exportButton {
-  background: transparent;
-  color: var(--fg-secondary);
-  border: 1px solid var(--border-light);
+.presentButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--accent);
+  color: white;
+  border: none;
   border-radius: var(--radius-sm);
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.9rem;
   font-size: 0.8rem;
   font-family: inherit;
   font-weight: 500;
   cursor: pointer;
-  text-decoration: none;
+  transition: opacity 0.15s ease;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.exportDropdown {
+  position: relative;
+}
+
+.exportToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--fg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.55rem;
+  cursor: pointer;
   transition: border-color 0.15s ease, color 0.15s ease;
 
   &:hover {
@@ -86,20 +113,35 @@
   }
 }
 
-.presentButton {
-  background: var(--accent);
-  color: white;
-  border: none;
+.exportMenu {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  background: var(--bg);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
-  padding: 0.5rem 1.25rem;
-  font-size: 0.85rem;
+  min-width: 120px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.exportMenuItem {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
   font-family: inherit;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
+  color: var(--fg-secondary);
+  text-decoration: none;
+  transition: background 0.1s ease, color 0.1s ease;
 
   &:hover {
-    opacity: 0.85;
+    background: var(--border-light);
+    color: var(--fg);
+  }
+
+  & + & {
+    border-top: 1px solid var(--border-light);
   }
 }
 

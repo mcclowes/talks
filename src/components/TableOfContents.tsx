@@ -1,12 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styles from "./TableOfContents.module.scss";
 
 interface TocItem {
   index: number;
   title: string;
   section?: string;
+}
+
+interface Section {
+  name: string | undefined;
+  items: TocItem[];
 }
 
 export function TableOfContents({ items }: { items: TocItem[] }) {
@@ -39,29 +44,54 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
     el?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Group items by section
-  let currentSection: string | undefined;
+  const sections = useMemo(() => {
+    const result: Section[] = [];
+    for (const item of items) {
+      const last = result[result.length - 1];
+      if (last && item.section === last.name) {
+        last.items.push(item);
+      } else {
+        result.push({ name: item.section, items: [item] });
+      }
+    }
+    return result;
+  }, [items]);
+
+  const activeSectionIndex = sections.findIndex((sec) =>
+    sec.items.some((item) => item.index === activeIndex),
+  );
 
   return (
     <nav className={styles.toc} aria-label="Table of contents">
       <h3 className={styles.heading}>Contents</h3>
       <ol className={styles.list}>
-        {items.map((item) => {
-          const showSection =
-            item.section && item.section !== currentSection;
-          if (item.section) currentSection = item.section;
+        {sections.map((section, si) => {
+          const isActive = si === activeSectionIndex;
 
           return (
-            <li key={item.index}>
-              {showSection && (
-                <span className={styles.section}>{item.section}</span>
+            <li key={si} className={styles.sectionGroup}>
+              {section.name && (
+                <button
+                  className={`${styles.sectionHeader} ${isActive ? styles.sectionActive : ""}`}
+                  onClick={() => handleClick(section.items[0].index)}
+                >
+                  {section.name}
+                </button>
               )}
-              <button
-                className={`${styles.item} ${activeIndex === item.index ? styles.active : ""}`}
-                onClick={() => handleClick(item.index)}
-              >
-                {item.title || `Slide ${item.index + 1}`}
-              </button>
+              {isActive && (
+                <ol className={styles.sectionItems}>
+                  {section.items.map((item) => (
+                    <li key={item.index}>
+                      <button
+                        className={`${styles.item} ${activeIndex === item.index ? styles.active : ""}`}
+                        onClick={() => handleClick(item.index)}
+                      >
+                        {item.title || `Slide ${item.index + 1}`}
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+              )}
             </li>
           );
         })}

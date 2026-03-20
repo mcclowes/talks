@@ -15,7 +15,7 @@ When your docs live in the repo, Claude Code can work across both simultaneously
 
 # My preferred stack
 
-![Claude](/images/wtd-london-docs-that-think/logo-claude.svg) ![GitHub](/images/wtd-london-docs-that-think/logo-github.svg) ![Vercel](/images/wtd-london-docs-that-think/logo-vercel.svg) ![Next.js](/images/wtd-london-docs-that-think/logo-nextjs.svg) ![Docusaurus](/images/wtd-london-docs-that-think/logo-docusaurus.svg)
+[![Claude](/images/wtd-london-docs-that-think/logo-claude.svg)](https://claude.ai) [![GitHub](/images/wtd-london-docs-that-think/logo-github.svg)](https://github.com) [![Vercel](/images/wtd-london-docs-that-think/logo-vercel.svg)](https://vercel.com) [![Next.js](/images/wtd-london-docs-that-think/logo-nextjs.svg)](https://nextjs.org) [![Docusaurus](/images/wtd-london-docs-that-think/logo-docusaurus.svg)](https://docusaurus.io)
 
 ## Three tools, one pipeline
 
