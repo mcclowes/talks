@@ -23,6 +23,15 @@ resources:
   - title: Claude skills hesitancy
     url: https://mcclowes.com/blog/2026/01/30/claude-skills-hesitancy
     description: Why Claude sometimes fails to activate skills and how to fix it
+  - title: skills.sh
+    url: https://skills.sh
+    description: Community directory for discovering and sharing Claude Code skills
+  - title: Docusaurus skills for Claude Code
+    url: https://github.com/mcclowes/claude-docusaurus-skills
+    description: Pre-built Claude Code skills for Docusaurus documentation projects
+  - title: docusaurus-plugin-llms
+    url: https://github.com/rachfop/docusaurus-plugin-llms
+    description: Docusaurus plugin to generate llms.txt files for LLM-friendly documentation
 summary: |
   We cover how technical writers can use Claude Code to work more effectively with docs-as-code workflows. We look at the differences between the standard Claude chat interface and Claude Code, focusing on how Claude Code can access local files, understand project structure, and run terminal commands. We dig into context windows, the `claude.md` project file, and well-structured prompts — all key to making the model behave like an informed collaborator rather than a generic chatbot.
 
