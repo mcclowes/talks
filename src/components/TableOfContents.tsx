@@ -40,8 +40,11 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
   }, []);
 
   const handleClick = (index: number) => {
-    const el = document.querySelector(`[data-slide-index="${index}"]`);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.dispatchEvent(new Event("switch-to-slides-tab"));
+    requestAnimationFrame(() => {
+      const el = document.querySelector(`[data-slide-index="${index}"]`);
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
   const sections = useMemo(() => {

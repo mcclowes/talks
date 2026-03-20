@@ -71,6 +71,15 @@
     object-fit: contain;
   }
 
+  p:has(> img + img) > img,
+  p:has(> a + a) > a > img {
+    display: inline-block;
+    height: 3rem;
+    width: auto;
+    margin-right: 1rem;
+    vertical-align: middle;
+  }
+
   table {
     width: 100%;
     border-collapse: separate;

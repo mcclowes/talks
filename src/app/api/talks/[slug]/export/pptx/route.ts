@@ -3,6 +3,21 @@ import PptxGenJS from "pptxgenjs";
 import { getTalk } from "@/lib/talks";
 import { markdownToPlainLines } from "@/lib/markdown-utils";
 
+const COLORS = {
+  bg: "FFFDF3",
+  bgSecondary: "FFFAE1",
+  fg: "333333",
+  fgSecondary: "817365",
+  accent: "FF7070",
+  heading: "4B5F5F",
+  border: "D7D1B1",
+};
+
+const FONTS = {
+  heading: "Georgia",
+  body: "Courier New",
+};
+
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ slug: string }> },
@@ -21,42 +36,86 @@ export async function GET(
 
   // Title slide
   const titleSlide = pptx.addSlide();
+  titleSlide.background = { color: COLORS.bg };
+
+  // Accent bar at top
+  titleSlide.addShape(pptx.ShapeType.rect, {
+    x: 0,
+    y: 0,
+    w: "100%",
+    h: 0.06,
+    fill: { color: COLORS.accent },
+  });
+
   titleSlide.addText(talk.title, {
-    x: 0.5,
+    x: 1,
     y: 1.5,
-    w: "90%",
+    w: "80%",
     fontSize: 36,
     bold: true,
-    color: "1a1a1a",
-    align: "center",
+    color: COLORS.heading,
+    fontFace: FONTS.heading,
+    align: "left",
   });
+
   if (talk.subtitle) {
     titleSlide.addText(talk.subtitle, {
-      x: 0.5,
-      y: 3.0,
-      w: "90%",
-      fontSize: 20,
-      color: "666666",
-      align: "center",
+      x: 1,
+      y: 3.2,
+      w: "80%",
+      fontSize: 18,
+      color: COLORS.fgSecondary,
+      fontFace: FONTS.body,
+      align: "left",
     });
   }
+
+  // Decorative bottom border
+  titleSlide.addShape(pptx.ShapeType.rect, {
+    x: 1,
+    y: 4.2,
+    w: 3,
+    h: 0.04,
+    fill: { color: COLORS.border },
+  });
 
   // Content slides
   for (const slide of talk.slides) {
     const s = pptx.addSlide();
+    s.background = { color: COLORS.bg };
 
-    let contentY = 0.5;
+    // Accent bar at top
+    s.addShape(pptx.ShapeType.rect, {
+      x: 0,
+      y: 0,
+      w: "100%",
+      h: 0.06,
+      fill: { color: COLORS.accent },
+    });
+
+    let contentY = 0.6;
 
     if (slide.title) {
       s.addText(slide.title, {
-        x: 0.5,
-        y: 0.3,
-        w: "90%",
+        x: 1,
+        y: 0.4,
+        w: "80%",
         fontSize: 28,
         bold: true,
-        color: "1a1a1a",
+        color: COLORS.heading,
+        fontFace: FONTS.heading,
       });
-      contentY = 1.2;
+
+      // Underline for heading
+      s.addShape(pptx.ShapeType.rect, {
+        x: 1,
+        y: 1.15,
+        w: 2,
+        h: 0.03,
+        fill: { color: COLORS.accent },
+      });
+
+      contentY = 1.5;
     }
 
     if (slide.body) {
@@ -64,21 +123,25 @@ export async function GET(
       const textObjects: PptxGenJS.TextProps[] = lines.map((line) => ({
         text: line.text,
         options: {
-          fontSize: 18,
-          color: "333333",
-          bullet: line.isBullet ? { indent: 0.3 } : false,
+          fontSize: 16,
+          color: COLORS.fg,
+          fontFace: FONTS.body,
+          bullet: line.isBullet
+            ? { indent: 0.3, color: COLORS.accent }
+            : false,
           breakType: "break" as const,
-          paraSpaceAfter: 6,
+          paraSpaceAfter: 8,
         },
       }));
 
       if (textObjects.length > 0) {
         s.addText(textObjects, {
-          x: 0.5,
+          x: 1,
           y: contentY,
-          w: "90%",
+          w: "78%",
           h: 5.5 - contentY,
           valign: "top",
+          lineSpacingMultiple: 1.4,
         });
       }
     }

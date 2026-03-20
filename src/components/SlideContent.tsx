@@ -53,14 +53,14 @@ interface EmbedMatch {
   node: ReactNode;
 }
 
-function renderWithEmbeds(markdown: string): ReactNode[] {
+function renderWithEmbeds(markdown: string, presentation?: boolean): ReactNode[] {
   const matches: EmbedMatch[] = [];
 
   for (const match of markdown.matchAll(QR_PATTERN)) {
     matches.push({
       index: match.index!,
       length: match[0].length,
-      node: <QRCode key={`qr-${match.index}`} url={match[1]} label={match[2]} />,
+      node: <QRCode key={`qr-${match.index}`} url={match[1]} label={match[2]} presentation={presentation} />,
     });
   }
 
@@ -140,12 +140,12 @@ export function SlideContent({ markdown, presentation }: SlideContentProps) {
       {imageRightSrc ? (
         <div className={presStyles.textPanel}>
           {hasEmbeds
-            ? renderWithEmbeds(contentMarkdown)
+            ? renderWithEmbeds(contentMarkdown, presentation)
             : renderMarkdown(contentMarkdown, "main")}
         </div>
       ) : (
         hasEmbeds
-          ? renderWithEmbeds(contentMarkdown)
+          ? renderWithEmbeds(contentMarkdown, presentation)
           : renderMarkdown(contentMarkdown, "main")
       )}
     </div>

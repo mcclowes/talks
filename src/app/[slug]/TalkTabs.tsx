@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
 import styles from "./page.module.scss";
 
 type TabId = "summary" | "slides" | "resources";
@@ -20,7 +20,12 @@ export function TalkTabs({ summary, slides, resources }: TalkTabsProps) {
 
   const [activeTab, setActiveTab] = useState<TabId>(tabs[0].id);
 
-  const active = tabs.find((t) => t.id === activeTab) ?? tabs[0];
+  const switchToSlides = useCallback(() => setActiveTab("slides"), []);
+
+  useEffect(() => {
+    window.addEventListener("switch-to-slides-tab", switchToSlides);
+    return () => window.removeEventListener("switch-to-slides-tab", switchToSlides);
+  }, [switchToSlides]);
 
   return (
     <>

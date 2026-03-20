@@ -23,3 +23,21 @@
     color: var(--accent);
   }
 }
+
+.linkBlock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent, var(--fg));
+  word-break: break-all;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

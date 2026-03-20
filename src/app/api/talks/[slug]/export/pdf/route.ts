@@ -3,6 +3,15 @@ import PDFDocument from "pdfkit";
 import { getTalk } from "@/lib/talks";
 import { stripQrSyntax, stripInlineMarkdown } from "@/lib/markdown-utils";
 
+const COLORS = {
+  bg: "#FFFDF3",
+  fg: "#333333",
+  fgSecondary: "#817365",
+  accent: "#FF7070",
+  heading: "#4B5F5F",
+  border: "#D7D1B1",
+};
+
 function docToBuffer(doc: PDFKit.PDFDocument): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const chunks: Uint8Array[] = [];
@@ -11,6 +20,18 @@ function docToBuffer(doc: PDFKit.PDFDocument): Promise<Buffer> {
     doc.on("error", reject);
     doc.end();
   });
+}
+
+function addAccentBar(doc: PDFKit.PDFDocument) {
+  doc.save();
+  doc.rect(0, 0, doc.page.width, 4).fill(COLORS.accent);
+  doc.restore();
+}
+
+function addPageBackground(doc: PDFKit.PDFDocument) {
+  doc.save();
+  doc.rect(0, 0, doc.page.width, doc.page.height).fill(COLORS.bg);
+  doc.restore();
 }
 
 export async function GET(
@@ -27,32 +48,60 @@ export async function GET(
   const doc = new PDFDocument({
     layout: "landscape",
     size: "A4",
-    margins: { top: 50, bottom: 50, left: 50, right: 50 },
+    margins: { top: 60, bottom: 60, left: 72, right: 72 },
     bufferPages: true,
   });
 
-  const pageWidth = doc.page.width - 100;
+  const pageWidth = doc.page.width - 144;
+  const contentX = 72;
 
   // Title slide
-  doc.fontSize(32).font("Helvetica-Bold");
-  doc.text(talk.title, 50, 120, { width: pageWidth, align: "center" });
+  addPageBackground(doc);
+  addAccentBar(doc);
+
+  doc.fontSize(32).font("Helvetica-Bold").fillColor(COLORS.heading);
+  doc.text(talk.title, contentX, 140, { width: pageWidth });
 
   if (talk.subtitle) {
-    doc.moveDown(0.5);
-    doc.fontSize(18).font("Helvetica").fillColor("#666666");
-    doc.text(talk.subtitle, 50, doc.y, { width: pageWidth, align: "center" });
-    doc.fillColor("#000000");
+    doc.moveDown(0.6);
+    doc.fontSize(18).font("Courier").fillColor(COLORS.fgSecondary);
+    doc.text(talk.subtitle, contentX, doc.y, { width: pageWidth });
   }
+
+  // Decorative line under title
+  doc
+    .save()
+    .moveTo(contentX, doc.y + 20)
+    .lineTo(contentX + 180, doc.y + 20)
+    .lineWidth(2)
+    .strokeColor(COLORS.border)
+    .stroke()
+    .restore();
 
   // Content slides
   for (const slide of talk.slides) {
     doc.addPage();
-    let y = 50;
+    addPageBackground(doc);
+    addAccentBar(doc);
+
+    let y = 30;
 
     if (slide.title) {
-      doc.fontSize(24).font("Helvetica-Bold");
-      doc.text(slide.title, 50, y, { width: pageWidth });
-      y = doc.y + 12;
+      doc.fontSize(24).font("Helvetica-Bold").fillColor(COLORS.heading);
+      doc.text(slide.title, contentX, y, { width: pageWidth });
+      y = doc.y + 4;
+
+      // Accent underline
+      doc
+        .save()
+        .moveTo(contentX, y)
+        .lineTo(contentX + 120, y)
+        .lineWidth(2)
+        .strokeColor(COLORS.accent)
+        .stroke()
+        .restore();
+
+      y += 16;
     }
 
     if (slide.body) {
@@ -62,37 +111,40 @@ export async function GET(
       for (const line of lines) {
         const trimmed = line.trim();
         if (!trimmed) {
-          y += 6;
+          y += 8;
           continue;
         }
 
-        if (y > doc.page.height - 60) {
+        if (y > doc.page.height - 70) {
           doc.addPage();
-          y = 50;
+          addPageBackground(doc);
+          addAccentBar(doc);
+          y = 30;
         }
 
         if (trimmed.startsWith("## ")) {
-          doc.fontSize(18).font("Helvetica-Bold");
-          doc.text(stripInlineMarkdown(trimmed.replace(/^##\s+/, "")), 50, y, {
+          doc.fontSize(18).font("Helvetica-Bold").fillColor(COLORS.heading);
+          doc.text(stripInlineMarkdown(trimmed.replace(/^##\s+/, "")), contentX, y, {
             width: pageWidth,
           });
-          y = doc.y + 8;
+          y = doc.y + 10;
           continue;
         }
 
         const bulletMatch = trimmed.match(/^[-*]\s+(.*)/);
         const text = stripInlineMarkdown(bulletMatch ? bulletMatch[1] : trimmed);
-        const xOffset = bulletMatch ? 70 : 50;
+        const xOffset = bulletMatch ? contentX + 20 : contentX;
         const textWidth = bulletMatch ? pageWidth - 20 : pageWidth;
 
-        doc.fontSize(14).font("Helvetica");
+        doc.fontSize(14).font("Courier").fillColor(COLORS.fg);
 
         if (bulletMatch) {
-          doc.text("\u2022", 55, y);
+          doc.fillColor(COLORS.accent).text("\u2022", contentX + 4, y);
+          doc.fillColor(COLORS.fg);
         }
 
-        doc.text(text, xOffset, y, { width: textWidth });
-        y = doc.y + 4;
+        doc.text(text, xOffset, y, { width: textWidth, lineGap: 4 });
+        y = doc.y + 6;
       }
     }
   }
