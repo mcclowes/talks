@@ -120,7 +120,34 @@ Or just write `llms.txt` by hand — it's markdown. Point it at your most import
 
 The key principle: **treat AI as a first-class consumer of your documentation.**
 
---- 
+---
+
+# Meaningful URL structure
+
+URLs aren't just for humans — they're how AI understands the relationships between your pages.
+
+**Flat URLs** — AI treats every page as equally related:
+
+```
+/docs/authentication
+/docs/webhooks-setup
+/docs/api-payments-create
+```
+
+**Hierarchical URLs** — AI infers structure and scope:
+
+```
+/docs/api/payments/create
+/docs/api/payments/refund
+/docs/guides/authentication
+/docs/guides/webhooks/setup
+```
+
+When an AI crawls `/docs/api/payments/create`, it knows to look for sibling pages under `/docs/api/payments/` — and won't confuse a guide with an API reference.
+
+**Your URL structure is metadata.** Treat it like an information architecture decision, not a routing convenience.
+
+---
 
 # Generating skills from your docs
 

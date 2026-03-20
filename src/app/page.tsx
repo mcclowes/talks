@@ -7,7 +7,12 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Talks</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Talks</h1>
+        <a href="https://mcclowes.com" className={styles.aboutLink}>
+          About Max
+        </a>
+      </div>
       {talks.length === 0 ? (
         <p className={styles.empty}>
           No talks yet. Add markdown files to <code>data/talks/</code> to get

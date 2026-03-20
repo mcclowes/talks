@@ -38,7 +38,7 @@ Hooks are configured in your Claude Code settings:
 
 # Slash commands for doc workflows
 
-Slash commands (custom skills invoked with `/name`) give your team repeatable doc tasks:
+Slash commands (custom commands invoked with `/name`) give your team repeatable doc tasks:
 
 **/rtf** — "Read the manual." Reviews CLAUDE.md and project docs, checks them against the actual codebase, and flags anything out of date.
 
@@ -46,7 +46,7 @@ Slash commands (custom skills invoked with `/name`) give your team repeatable do
 
 **/commit-push** — Stages, commits with a meaningful message, and pushes. Consistent commit hygiene without thinking about it.
 
-These live in your repo as markdown files in `.claude/skills/`. Anyone on the team can use them.
+These live in your repo as markdown files in `.claude/commands/`. Anyone on the team can use them.
 
 ---
 

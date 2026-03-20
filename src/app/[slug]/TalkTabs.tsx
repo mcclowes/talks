@@ -3,31 +3,46 @@
 import { useState, type ReactNode } from "react";
 import styles from "./page.module.scss";
 
+type TabId = "summary" | "slides" | "resources";
+
 interface TalkTabsProps {
-  summary: ReactNode;
+  summary?: ReactNode;
   slides: ReactNode;
+  resources?: ReactNode;
 }
 
-export function TalkTabs({ summary, slides }: TalkTabsProps) {
-  const [activeTab, setActiveTab] = useState<"summary" | "slides">("summary");
+export function TalkTabs({ summary, slides, resources }: TalkTabsProps) {
+  const tabs: { id: TabId; label: string; content: ReactNode }[] = [];
+
+  if (summary) tabs.push({ id: "summary", label: "Summary", content: summary });
+  tabs.push({ id: "slides", label: "Slides", content: slides });
+  if (resources) tabs.push({ id: "resources", label: "Resources", content: resources });
+
+  const [activeTab, setActiveTab] = useState<TabId>(tabs[0].id);
+
+  const active = tabs.find((t) => t.id === activeTab) ?? tabs[0];
 
   return (
     <>
       <div className={styles.tabs}>
-        <button
-          className={`${styles.tab} ${activeTab === "summary" ? styles.tabActive : ""}`}
-          onClick={() => setActiveTab("summary")}
-        >
-          Summary
-        </button>
-        <button
-          className={`${styles.tab} ${activeTab === "slides" ? styles.tabActive : ""}`}
-          onClick={() => setActiveTab("slides")}
-        >
-          Slides
-        </button>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ""}`}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
-      {activeTab === "summary" ? summary : slides}
+      {tabs.map((tab) => (
+        <div
+          key={tab.id}
+          style={activeTab !== tab.id ? { display: "none" } : undefined}
+        >
+          {tab.content}
+        </div>
+      ))}
     </>
   );
 }

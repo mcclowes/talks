@@ -7,6 +7,16 @@ tags:
   - claude
   - documentation
   - AI
+resources:
+  - title: Claude Code docs
+    url: https://docs.anthropic.com/en/docs/claude-code
+    description: Official Claude Code documentation
+  - title: CLAUDE.md best practices
+    url: https://docs.anthropic.com/en/docs/claude-code/claude-md
+    description: Guide to writing effective CLAUDE.md files
+  - title: Claude Code hooks
+    url: https://docs.anthropic.com/en/docs/claude-code/hooks
+    description: Automate workflows with lifecycle hooks
 summary: |
   We cover how technical writers can use Claude Code to work more effectively with docs-as-code workflows. We look at the differences between the standard Claude chat interface and Claude Code, focusing on how Claude Code can access local files, understand project structure, and run terminal commands. We dig into context windows, the `claude.md` project file, and well-structured prompts — all key to making the model behave like an informed collaborator rather than a generic chatbot.
 

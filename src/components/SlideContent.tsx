@@ -137,11 +137,17 @@ export function SlideContent({ markdown, presentation }: SlideContentProps) {
           <ImageZoom src={imageRightSrc} alt={imageRightAlt} />
         </div>
       )}
-      <div className={imageRightSrc ? presStyles.textPanel : undefined}>
-        {hasEmbeds
+      {imageRightSrc ? (
+        <div className={presStyles.textPanel}>
+          {hasEmbeds
+            ? renderWithEmbeds(contentMarkdown)
+            : renderMarkdown(contentMarkdown, "main")}
+        </div>
+      ) : (
+        hasEmbeds
           ? renderWithEmbeds(contentMarkdown)
-          : renderMarkdown(contentMarkdown, "main")}
-      </div>
+          : renderMarkdown(contentMarkdown, "main")
+      )}
     </div>
   );
 }

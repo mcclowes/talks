@@ -1,0 +1,1 @@
+Read the fucking manual, review CLAUDE.md and other documentation, and ensure they are accurate

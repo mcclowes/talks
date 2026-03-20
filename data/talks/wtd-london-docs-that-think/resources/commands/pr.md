@@ -1,0 +1,1 @@
+Create a pull request for the current branch. Analyze all commits since diverging from main, write a clear summary, and use `gh pr create`.

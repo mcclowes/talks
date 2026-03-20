@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTalk, getTalkSlugs } from "@/lib/talks";
+import { getTalk, getTalkSlugs, getTalkResources } from "@/lib/talks";
 import { SlideContent } from "@/components/SlideContent";
 import { TableOfContents } from "@/components/TableOfContents";
+import { ResourceTree } from "@/components/ResourceTree";
 import { PresentationWrapper } from "@/components/PresentationMode";
 import type { Slide } from "@/components/PresentationMode";
 import { TalkPageClient } from "./TalkPageClient";
@@ -11,6 +13,35 @@ import styles from "./page.module.scss";
 
 export function generateStaticParams() {
   return getTalkSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const talk = getTalk(slug);
+  if (!talk) return {};
+
+  const title = talk.title;
+  const description = talk.subtitle || `A talk by Max Clayton Clowes`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      ...(talk.date && { publishedTime: talk.date }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function TalkPage({
@@ -28,6 +59,27 @@ export default async function TalkPage({
     content: <SlideContent markdown={s.body} presentation />,
     section: s.section,
   }));
+
+  const resourceFiles = getTalkResources(slug);
+  const hasLinks = (talk.resources?.length ?? 0) > 0;
+  const hasFiles = resourceFiles.length > 0;
+  const hasResources = hasLinks || hasFiles;
+  const hasTabs = talk.summary || hasResources;
+
+  const slidesContent = (
+    <div className={styles.slides}>
+      {talk.slides.map((slide, i) => (
+        <section
+          key={i}
+          className={styles.slideSection}
+          data-slide-index={i}
+        >
+          {slide.title && <h2>{slide.title}</h2>}
+          <SlideContent markdown={slide.body} />
+        </section>
+      ))}
+    </div>
+  );
 
   return (
     <PresentationWrapper
@@ -50,41 +102,28 @@ export default async function TalkPage({
 
           <TalkPageClient slug={slug} />
 
-          {talk.summary ? (
+          {hasTabs ? (
             <TalkTabs
               summary={
-                <div className={styles.summary}>
-                  <SlideContent markdown={talk.summary} />
-                </div>
+                talk.summary ? (
+                  <div className={styles.summary}>
+                    <SlideContent markdown={talk.summary} />
+                  </div>
+                ) : undefined
               }
-              slides={
-                <div className={styles.slides}>
-                  {talk.slides.map((slide, i) => (
-                    <section
-                      key={i}
-                      className={styles.slideSection}
-                      data-slide-index={i}
-                    >
-                      {slide.title && <h2>{slide.title}</h2>}
-                      <SlideContent markdown={slide.body} />
-                    </section>
-                  ))}
-                </div>
+              slides={slidesContent}
+              resources={
+                hasResources ? (
+                  <ResourceTree
+                    slug={slug}
+                    links={talk.resources}
+                    files={hasFiles ? resourceFiles : undefined}
+                  />
+                ) : undefined
               }
             />
           ) : (
-            <div className={styles.slides}>
-              {talk.slides.map((slide, i) => (
-                <section
-                  key={i}
-                  className={styles.slideSection}
-                  data-slide-index={i}
-                >
-                  {slide.title && <h2>{slide.title}</h2>}
-                  <SlideContent markdown={slide.body} />
-                </section>
-              ))}
-            </div>
+            slidesContent
           )}
         </main>
         <aside className={styles.sidebar}>

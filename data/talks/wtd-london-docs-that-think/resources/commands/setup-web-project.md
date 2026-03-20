@@ -1,0 +1,7 @@
+- Ensure we have a robust .gitignore
+- Let's use npm for dependencies (rather than pnpm or yarn)
+- Setup useful Claude skills for this stack - e.g. skills install https://github.com/wsimmonds/claude-nextjs-skills
+- Ensure we have prettier and/or eslint. Format and lint the project.
+- Rename the project in the package.json
+- Create a CLAUDE.md file
+- Update the README.md

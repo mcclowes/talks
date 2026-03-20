@@ -10,6 +10,19 @@ function isValidSlug(slug: string): boolean {
   return VALID_SLUG.test(slug) && !slug.includes("..") && !slug.includes("/");
 }
 
+export interface ResourceFile {
+  name: string;
+  path: string;
+  type: "file" | "directory";
+  children?: ResourceFile[];
+}
+
+export interface ResourceLink {
+  title: string;
+  url: string;
+  description?: string;
+}
+
 export interface TalkMeta {
   slug: string;
   title: string;
@@ -27,6 +40,7 @@ export interface TalkSlide {
 
 export interface Talk extends TalkMeta {
   slides: TalkSlide[];
+  resources?: ResourceLink[];
 }
 
 interface TalkEntry {
@@ -121,6 +135,7 @@ export function getTalk(slug: string): Talk | null {
     tags: data.tags as string[] | undefined,
     summary: data.summary as string | undefined,
     slides,
+    resources: data.resources as ResourceLink[] | undefined,
   };
 }
 
@@ -176,6 +191,56 @@ function loadDirectorySlides(
   });
 
   return [...indexSlides, ...sectionSlides];
+}
+
+function listResources(dir: string, relativeTo: string): ResourceFile[] {
+  if (!fs.existsSync(dir)) return [];
+
+  return fs
+    .readdirSync(dir)
+    .filter((name) => !name.startsWith("."))
+    .sort()
+    .map((name) => {
+      const fullPath = path.join(dir, name);
+      const relPath = path.relative(relativeTo, fullPath);
+      const stat = fs.statSync(fullPath);
+
+      if (stat.isDirectory()) {
+        return {
+          name,
+          path: relPath,
+          type: "directory" as const,
+          children: listResources(fullPath, relativeTo),
+        };
+      }
+
+      return { name, path: relPath, type: "file" as const };
+    });
+}
+
+export function getTalkResources(slug: string): ResourceFile[] {
+  if (!isValidSlug(slug)) return [];
+
+  const resourcesDir = path.join(TALKS_DIR, slug, "resources");
+  return listResources(resourcesDir, resourcesDir);
+}
+
+export function getTalkResourceContent(
+  slug: string,
+  resourcePath: string,
+): { content: Buffer; filename: string } | null {
+  if (!isValidSlug(slug)) return null;
+
+  const normalized = path.normalize(resourcePath);
+  if (normalized.includes("..")) return null;
+
+  const fullPath = path.join(TALKS_DIR, slug, "resources", normalized);
+  if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile()) return null;
+
+  return {
+    content: fs.readFileSync(fullPath),
+    filename: path.basename(fullPath),
+  };
 }
 
 function parseSlides(content: string): TalkSlide[] {

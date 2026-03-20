@@ -19,7 +19,7 @@ The bottleneck isn't the knowledge — it's the trigger.
 
 # Forcing activation
 
-Scott Spence's three-step forced evaluation:
+[Scott Spence's three-step forced evaluation](https://scottspence.com/posts/measuring-claude-code-skill-activation-with-sandboxed-evals):
 
 1. **EVALUATE** — for each skill, state YES/NO with reasoning
 2. **ACTIVATE** — call `Skill()` immediately

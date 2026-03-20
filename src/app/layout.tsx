@@ -13,9 +13,30 @@ const inknutAntiqua = Inknut_Antiqua({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://talks.mcclowes.com";
+
 export const metadata: Metadata = {
-  title: "Talks",
-  description: "Presentations and talks",
+  title: {
+    default: "Talks — Max Clayton Clowes",
+    template: "%s — Talks by Max Clayton Clowes",
+  },
+  description:
+    "Presentations and talks by Max Clayton Clowes on developer experience, documentation, and AI.",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: "Talks — Max Clayton Clowes",
+    title: "Talks — Max Clayton Clowes",
+    description:
+      "Presentations and talks by Max Clayton Clowes on developer experience, documentation, and AI.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Talks — Max Clayton Clowes",
+    description:
+      "Presentations and talks by Max Clayton Clowes on developer experience, documentation, and AI.",
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${robotoMono.variable} ${inknutAntiqua.variable}`}>
+      <body suppressHydrationWarning className={`${robotoMono.variable} ${inknutAntiqua.variable}`}>
         {children}
       </body>
     </html>
