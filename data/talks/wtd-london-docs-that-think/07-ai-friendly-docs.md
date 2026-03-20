@@ -4,9 +4,20 @@ section: AI-friendly docs
 
 # Making your docs AI-friendly
 
-AI tools are only as good as what they can read. 
+- Your users are already asking AI rather than visiting your site.
+- AI tools are only as good as what they can read. 
 
 If your docs aren't structured for LLM consumption, your users' tools will struggle to make sense of it.
+
+---
+
+# Imagine a future when...
+
+Users don't even look at your documentation.
+
+It's all consumed via an AI middle-man.
+
+Start preparing for this - infrastructure, architecture, etc.
 
 ---
 
@@ -19,6 +30,8 @@ A convention for exposing your docs to AI tools. Two files at your site root:
 **llms-full.txt** — Your entire documentation consolidated into a single file, ready for an LLM to ingest.
 
 Think of it as `robots.txt` but for AI assistants instead of search crawlers.
+
+> Note: Still nascent and not an established norm.
 
 ---
 

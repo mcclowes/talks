@@ -4,6 +4,10 @@
     max-width: 70vw;
   }
 
+  p:has(> img:only-child) {
+    text-align: center;
+  }
+
   img + p {
     max-height: 40vh;
     max-width: 40vw;

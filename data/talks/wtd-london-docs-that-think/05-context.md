@@ -55,7 +55,16 @@ Things that use up context window:
 
 # Stupid AI does stupid things
 
-If you don't proactively provide good context, it will:
+If you don't *proactively* provide the right context, Claude will:
 - Go looking for information (and fill the window)
 - Look at/for irrelevant info
 - Fail at the task and need to try again
+
+---
+
+# When to reset
+
+Consider starting a new chat or CLI conversation when:
+
+- You have a new task that doesn't relate to the previous prompt
+- You're approaching the context window limit of your current session

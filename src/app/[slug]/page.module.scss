@@ -37,6 +37,19 @@
   }
 }
 
+.backLink {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--fg-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--fg);
+  }
+}
+
 .header {
   margin-bottom: 2rem;
 
@@ -143,6 +156,40 @@
   & + & {
     border-top: 1px solid var(--border-light);
   }
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--fg-secondary);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: var(--fg);
+  }
+}
+
+.tabActive {
+  color: var(--fg);
+  border-bottom-color: var(--accent);
+}
+
+.summary {
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
 .slides {

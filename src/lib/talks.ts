@@ -16,6 +16,7 @@ export interface TalkMeta {
   subtitle?: string;
   date?: string;
   tags?: string[];
+  summary?: string;
 }
 
 export interface TalkSlide {
@@ -88,6 +89,7 @@ export function getAllTalks(): TalkMeta[] {
       subtitle: data.subtitle as string | undefined,
       date: data.date as string | undefined,
       tags: data.tags as string[] | undefined,
+      summary: data.summary as string | undefined,
     });
     return talks;
   }, []);
@@ -117,6 +119,7 @@ export function getTalk(slug: string): Talk | null {
     subtitle: data.subtitle as string | undefined,
     date: data.date as string | undefined,
     tags: data.tags as string[] | undefined,
+    summary: data.summary as string | undefined,
     slides,
   };
 }
