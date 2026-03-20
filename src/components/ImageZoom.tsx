@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import { createPortal } from "react-dom";
 import styles from "./ImageZoom.module.scss";
 
 interface ImageZoomProps {
@@ -34,12 +35,14 @@ export function ImageZoom({ src, alt }: ImageZoomProps) {
         onClick={() => setIsOpen(true)}
         className={styles.zoomable}
       />
-      {isOpen && (
-        <div className={styles.overlay} onClick={close}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={alt || ""} />
-        </div>
-      )}
+      {isOpen &&
+        createPortal(
+          <div className={styles.overlay} onClick={close}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={src} alt={alt || ""} />
+          </div>,
+          document.body
+        )}
     </>
   );
 }
